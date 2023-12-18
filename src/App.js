@@ -1,12 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import { Outlet, createBrowserRouter } from 'react-router-dom';
+import Navbar from './components/Navbar/Navbar';
+import Home from './components/Home/Home';
+
+
+const AppLayout = () => {
   return (
-    <div className="App">
-     
+    <div>
+    <Navbar/>
+    <Outlet/>
     </div>
-  );
+  )
 }
 
-export default App;
+const appRouter = createBrowserRouter([
+  {
+    path: "/home",
+    element: <AppLayout/>,
+    children: [
+      {
+        path: "/home",
+        element: <Home/>
+      }
+    ]
+  },
+])
+
+export default appRouter

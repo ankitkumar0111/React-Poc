@@ -1,0 +1,42 @@
+*{
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+
+.home{
+    width: 50%;
+    margin: auto;
+}
+
+.upper-box{
+    display: flex;
+    width: 100%;
+    margin: auto;
+    
+}
+
+.heading-box{
+    width: 45%;
+    background-color: #FFF200;
+}
+
+.heading{
+    font-weight: 700;
+    font-size: 35px;
+    display: flex;
+    padding: 35px;
+    width: 58%;
+    margin-top: 50px;
+}
+
+.home-pic{
+    width: 50%;
+    padding: 0;
+}
+
+.first-line{
+    margin-left: 60px;
+    /* padding: 1px; */
+    font-size: 28px;
+    font-weight: 600;
+}
