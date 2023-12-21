@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import "./Home.css"
 import validator from "validator";
+import SearchIcon from '@mui/icons-material/Search';
 
 const HomeForm = () => {
 
+  const [results, setResults] = useState([])
+  const [input, setInput] = useState("")
     const [dateString, setDateString] = useState()
     const [message, setMessage] = useState(null)
     const handleDate = (e) => {
@@ -17,11 +20,45 @@ const HomeForm = () => {
             // setMessageColor("red");
           }
     }
+
+    const fetchCode = async(value) => {
+      const data = await fetch("http://localhost:3000/country")
+      const json = await data.json()
+
+      const filteredData = json.filter((country) => {
+        return (
+          value && country && country.name && country.name.toLowerCase().includes(value) || country.name.toUpperCase().includes(value)
+        )
+      })
+      setResults(filteredData)
+      console.log(results);
+    }
+    const handleChange = (value) => {
+      setInput(value)
+      fetchCode(value)
+    }
   return (
     <div className='container'>
         <form>
             <div className='upper-fields'>
-                <input type='text' placeholder='Country Code'/>
+            <div className='code-search'>
+            <div className='code-search-input'>
+                <input type='text' value={input} placeholder='Country Code' onChange={(e) => handleChange(e.target.value)}/>
+                <SearchIcon className='search-icon'/>
+                </div>
+                <div className='result'>
+                {results.map((result, id) => {
+                  return (
+                    <div key={result.id} className='result-list'>
+                      <div>
+                        <img src={`https://flagcdn.com/w40/${result.iso2.toLowerCase()}.png`} alt="" />
+                        <p>+{result.phone_code} ({result.iso2})</p>
+                      </div>
+                    </div>
+                  )
+                })}
+                </div>
+                </div>
                 <input type='number' placeholder='Phone Number'/>
             </div>
             <div className='lower-field'>
