@@ -2,6 +2,7 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
+import OtpPage from './components/Otp/OtpPage';
 
 
 const AppLayout = () => {
@@ -15,12 +16,17 @@ const AppLayout = () => {
 
 const appRouter = createBrowserRouter([
   {
-    path: "/home",
+    path: "/",
     element: <AppLayout/>,
     children: [
       {
         path: "/home",
-        element: <Home/>
+        element: <Home/>,
+      
+      },
+      {
+        path:'/home/otp',
+        element: <OtpPage/>,
       }
     ]
   },
