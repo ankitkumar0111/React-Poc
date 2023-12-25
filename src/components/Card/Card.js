@@ -1,9 +1,10 @@
 import * as React from "react";
-import { useState } from "react";
+// import { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { makeStyles } from "@mui/styles";
 import { Icon } from "@mui/material";
+import DoneIcon from '@mui/icons-material/Done'
 
 
 
@@ -39,7 +40,7 @@ const useStyles = makeStyles({
     fontSize: 19,
     fontWeight: 700,
     padding: 8,
-  }
+  },
 //   tickSymbol: {
 //     position: 'absolute',
 //     top: '8px',
@@ -48,23 +49,40 @@ const useStyles = makeStyles({
 //     color: 'green',
 //     visibility: 'hidden',
 //   },
-// //   cardClicked: {
-// //     '& $tickSymbol': {
-// //       visibility: 'visible',
-// //     },
-//   },
+  cardClicked: {
+    // '& $tickSymbol': {
+    //   visibility: 'visible',
+    //   position: "absolute"
+    // },
+    border: "2px solid black",
+    // position:"relative"
+  },
+  tickSymbol: {
+    position: 'absolute',
+    top: '8px',
+    right: '8px',
+    fontSize: '24px',
+    color: 'green',
+    visibility: 'hidden',
+  },
+  tickVisible: {
+    visibility: 'visible',
+  },
 });
 
-const BasicCard = ({ name, icon }) => {
+const BasicCard = ({ name, icon,isSelected, onClick }) => {
   const classes = useStyles();
-  const [clicked, setClicked] = useState(false)
+  // const [clicked, setClicked] = useState(false)
 
-  const handleCardClick = () => {
-    setClicked(!clicked)
-  }
+  // const handleCardClick = () => {
+  //   setClicked(!clicked)
+  // }
   return (
-    <Card className={`${classes.root} ${clicked ? classes.cardClicked : ""}`} onclick={handleCardClick}>
-    
+    <Card className={`${classes.root} ${isSelected ? classes.cardClicked  : ""}`} onClick={onClick}>
+       {/* <div className={classes.tickSymbol}>&#10003;</div> */}
+       {isSelected && (
+        <DoneIcon className={`${classes.tickSymbol} ${classes.tickVisible}`} />
+      )}
       <CardContent className={classes.content}>
         <div className={classes.icon}>
         {icon &&
@@ -77,7 +95,6 @@ const BasicCard = ({ name, icon }) => {
         {name}
         </div>
        
-      {/* <div className={classes.tickSymbol}>&#10003;</div> */}
       </CardContent>
     </Card>
   );

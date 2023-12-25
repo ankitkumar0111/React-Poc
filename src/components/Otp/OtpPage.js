@@ -1,8 +1,13 @@
 import React from 'react'
 import "./OtpPage.css"
 import Otp from './Otp'
+import { useNavigate } from 'react-router-dom'
 
 const OtpPage = () => {
+  const navigate = useNavigate
+  const handleSubmit = () => {
+    navigate("")
+  }
   return (
     <div className='otp'>
        <p className='first-para'>For your protection, enter a one-time password(OTP)</p>
@@ -13,7 +18,7 @@ const OtpPage = () => {
        <p>Resend OTP in 0:38</p>
        </div>
        <div className='submit-button'>
-        <button>Submit</button>
+        <button onClick={handleSubmit}>Submit</button>
        </div>
     </div>
   )

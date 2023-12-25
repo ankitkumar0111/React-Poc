@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
-import { FiSearch } from "react-icons/fi";
+// import { FiSearch } from "react-icons/fi";
 
-const Search = () => {
+const Search = ({ countryCode, setCountryCode}) => {
     const [data , setData] = useState([])
+  const [selectedOption, setSelectedOption] = useState(null);
 //   const jsonData = [
 //     {
 //       id: 1,
@@ -33,13 +34,13 @@ const Search = () => {
 const options = data.map((country) => ({
     value: country.id,
     label: (
-      <div>
+      <div style={{ display: "flex", margin: "-8px"}}>
         <img
           src={`https://flagcdn.com/w40/${country?.iso2.toLowerCase()}.png`}
           alt={country.name}
-          style={{ width: "24px", marginRight: "5px" }}
+          style={{ width: "36px", marginRight: "8px",border:"1px solid #D9D9D9", height: "30px", marginTop:"10px"}}
         />
-        {` +${country.phone_code} ${country.iso2}`}
+        <p style={{ fontWeight:"500", fontSize: "18px"}}>{` +${country.phone_code} ${country.iso2}`}</p>
       </div>
     ),
     name: country.name.toLowerCase(),
@@ -47,7 +48,6 @@ const options = data.map((country) => ({
     iso2: country.iso2.toLowerCase()
   }));
 
-  const [selectedOption, setSelectedOption] = useState(null);
 
 //   const options = jsonData.map((country) => ({
 //     value: country.id,
@@ -66,8 +66,25 @@ const options = data.map((country) => ({
 //   }));
 
   const handleChange = (selected) => {
+    console.log(selected);
+    const cleanedSelected= {
+        iso2: selected.iso2,
+        name: selected.name,
+        phoneCode: selected.phoneCode
+    }
+    console.log(cleanedSelected);
+    // console.log("sdc",selected);
     setSelectedOption(selected);
+    setCountryCode(cleanedSelected)
+    // console.log("country",selectedOption);
+    // handleCodeChange(selected)
   };
+
+//   useEffect(() => {
+//     if (selectedOption) {
+//       handleCodeChange(selectedOption);
+//     }
+//   }, [selectedOption, handleCodeChange]);
 
 //   const DropdownIndicator = () => {
 //     return (
@@ -96,7 +113,8 @@ const options = data.map((country) => ({
     }),
     menu: (provided, state) => ({
       ...provided,
-      width: "300px" ,
+      width: "345px" ,
+      zIndex:"10"
 //    border: state.isFocused ? "1px solid blue" : "1px solid #ccc",
 //    border: state.
     }),
@@ -104,10 +122,16 @@ const options = data.map((country) => ({
     //   ...provided,
     //   color: "skyblue" 
     // }),
-    option: (provided, state) => ({
-      ...provided,
-      backgroundColor: state.isSelected ? "grey" : "white",
-      color: state.isSelected ? "white" : "black" 
+    // option: (provided, state) => ({
+    //   ...provided,
+    //   backgroundColor: state.isSelected ? "grey" : "white",
+    //   color: state.isSelected ? "white" : "black" 
+    // }),
+    placeholder:(provided) => ({
+        ...provided,
+        color: "rgb(146, 144, 144)",
+    fontWeight: "500",
+    fontSize: "18px",
     })
 
   };
@@ -131,6 +155,7 @@ const options = data.map((country) => ({
         // components={{ DropdownIndicator }}
         styles={customStyles}
         filterOption={filterOptions}
+        required
       />
     </div>
   );

@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Home.css";
 import Search from "./Search";
+import SearchIcon from '@mui/icons-material/Search';
+import DateSelector from "./DateSelector";
+import { useNavigate } from "react-router-dom";
 
 const HomeForm = () => {
+  const [countryCode , setCountryCode] = useState(null)
+  const [date, setDate] = useState(null)
+  const [phoneNumber, setPhoneNumber] = useState(null)
+  const navigate = useNavigate()
   // const [results, setResults] = useState([]);
   // const [input, setInput] = useState("");
   // const [selectedResult, setSelectedResult] = useState(null);
@@ -49,10 +56,49 @@ const HomeForm = () => {
   // const handleClick = (result) => {
   //   setSelectedResult(result);
   // };
+  // const handleCodeChange = (code) => {
+  //   setCountryCode(code)
+  //   console.log("code",countryCode);
+  // }
+
+  const handleChange = (e) => {
+    const { value} = e.target
+    setPhoneNumber(value)
+    // console.log(phoneNumber);
+  }
+  const handleSubmit = async(e) => {
+    e.preventDefault()
+    console.log("Form submitted",countryCode, date,phoneNumber);
+    const formData = {
+      countryCode : countryCode,
+      date: date?.toString(),
+      phoneNumber: phoneNumber
+    }
+    try{
+      const response = await fetch('http://localhost:3000/users',{
+        method: "POST",
+        headers: {
+          "Content-type" : "application/json",
+        },
+        body: JSON.stringify(formData)
+      })
+      if(response.ok){
+        alert("Form Submitted Sucesfully")
+        navigate("/home/otp")
+      }
+      else{
+        alert("Form not Submitted")
+      }
+    }
+    catch(error){
+      console.log("Error",error);
+    }
+    
+  }
 
   return (
     <div className="container">
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="upper-fields">
           <div className="code-search">
             <div className="code-search-input">
@@ -69,9 +115,9 @@ const HomeForm = () => {
                 onChange={handleChange}
               />
               </div> */}
-              <Search />
+              <Search countryCode={countryCode} setCountryCode={setCountryCode}/>
               
-              {/* <SearchIcon className="search-icon" /> */}
+              <SearchIcon className="search-icon" />
             </div>
             {/* <div className="result">
               <div className="result2">
@@ -98,21 +144,22 @@ const HomeForm = () => {
             </div> */}
           </div>
           <div className="phone-number">
-            <input type="number" placeholder="Phone Number" />
+            <input type="number" placeholder="Phone Number" value={phoneNumber} onChange={handleChange} required/>
           </div>
         </div>
         <div className="lower-field">
-          <input
+          {/* <input
             type="date"
             // value={dateString}
             placeholder="Date of birth (MM/DD/YYYY)"
             // onChange={handleDate}
             max="2023-01-27"
-          />
+          /> */}
+          <DateSelector date={date} setDate={setDate} />
           {/* <p>{message}</p> */}
         </div>
         <div className="button">
-          <button>Continue</button>
+          <button type="submit">Continue</button>
         </div>
       </form>
     </div>
