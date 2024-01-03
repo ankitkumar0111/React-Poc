@@ -3,6 +3,7 @@ import { Outlet, createBrowserRouter } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
 import OtpPage from './components/Otp/OtpPage';
+import ReceiverDetails from './components/Receiver/ReceiverDetails';
 // import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 // import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 
@@ -32,6 +33,10 @@ const appRouter = createBrowserRouter([
       {
         path:'/home/otp',
         element: <OtpPage/>,
+      },
+      {
+        path:'/home/receiver-add',
+        element: <ReceiverDetails/>
       }
     ]
   },
