@@ -4,6 +4,7 @@ import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
 import OtpPage from './components/Otp/OtpPage';
 import ReceiverDetails from './components/Receiver/ReceiverDetails';
+import PersonalDetails from './components/Personal/PersonalDetails';
 // import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 // import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 
@@ -37,6 +38,10 @@ const appRouter = createBrowserRouter([
       {
         path:'/home/receiver-add',
         element: <ReceiverDetails/>
+      },
+      {
+        path:'/home/sender-info',
+        element: <PersonalDetails/>
       }
     ]
   },

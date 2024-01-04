@@ -42,7 +42,7 @@
     margin-top: 65px;
 }
 
-.first-name>input::placeholder,.email>input::placeholder{
+.first-name>input::placeholder,.email>input::placeholder,.city-name>input::placeholder,.state-search>input::placeholder{
     font-size: 20px;
     font-weight: 500;
 }
@@ -74,15 +74,24 @@
 .country-mobile{
     display: flex;
     margin-top: 40px;
+    justify-content: space-between;
+}
+
+.code-result{
+    position: relative;
+    width: 40%;
+    border-bottom: 2px solid rgb(223, 221, 221);
 }
 
 .country-code-search{
     display: flex;
     /* border-bottom:  2px solid rgb(223, 221, 221); */
 }
-.code-result{
-    position: relative;
+
+.country-code-search>input{
+    border: none;
 }
+
 
 .result{
     padding: 0px;
@@ -121,6 +130,46 @@
 
 .mobile-number{
     width: 55%;
+}
+
+.city-name{
+    margin-top: 60px;
+}
+
+.state{
+    margin-top: 60px;
+}
+
+.state-result{
+    position: relative;
+    border-bottom: 2px solid rgb(223, 221, 221);
+}
+
+.state-search{
+    display: flex;
+}
+
+.state-search>input{
+    border: none;
+}
+
+.button-receiver{
+    display: flex;
+    justify-content: center;
+    margin-top: 75px;
+    margin-bottom: 40px;
+}
+
+.button-receiver>button{
+    cursor: pointer;
+    background-color: #FFF200;
+    border: 1px solid #FFF200;
+    border-radius: 30px;
+    color: black;
+    width: 80%;
+    padding: 15px;
+    font-weight: 600;
+    font-size: 18px;
 }
 
 
