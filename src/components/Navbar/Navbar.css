@@ -11,13 +11,13 @@
     padding: 20px;
 }
 
-ul{
+.navbar-div>ul{
     color: white;
     display: flex;
     margin-right: 50px;
 }
 
-li{
+.navbar-div>ul>li{
     padding: 20px;
     list-style-type: none;
     text-decoration: none;

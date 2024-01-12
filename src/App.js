@@ -5,6 +5,9 @@ import Home from './components/Home/Home';
 import OtpPage from './components/Otp/OtpPage';
 import ReceiverDetails from './components/Receiver/ReceiverDetails';
 import PersonalDetails from './components/Personal/PersonalDetails';
+import { Provider } from "react-redux"
+import appStore from './utils/appStore';
+import Details from './components/Details/Details';
 // import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 // import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 
@@ -13,10 +16,12 @@ import PersonalDetails from './components/Personal/PersonalDetails';
 const AppLayout = () => {
   return (
     // <LocalizationProvider dateAdapter={AdapterDateFns}>
+    <Provider store={appStore}>
     <div>
     <Navbar/>
     <Outlet/>
     </div>
+    </Provider>
     // </LocalizationProvider>
   )
 }
@@ -42,6 +47,10 @@ const appRouter = createBrowserRouter([
       {
         path:'/home/sender-info',
         element: <PersonalDetails/>
+      },
+      {
+        path: 'home/money-details',
+        element: <Details/>
       }
     ]
   },

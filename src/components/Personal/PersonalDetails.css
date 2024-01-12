@@ -33,11 +33,40 @@
     margin-top: 15px;
 }
 
-.first-name-2>input{
+.first-name-2>input,.address-fields>input,.country-phone>input{
     margin-top: 65px;
 }
 
-.first-name-2>input::placeholder{
+.dob>input{
+    margin-top: 50px;
+}
+
+.first-name-2>input::placeholder,.address-fields>input::placeholder,.dob>input::placeholder,.country-phone>input::placeholder{
     font-size: 20px;
     font-weight: 500;
 }
+
+/* .address-fields>input{
+    margin-top: ;
+} */
+
+.address-heading{
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 42px;
+    margin-bottom: -25px;
+}
+
+.country-phone{
+    display: flex;
+    justify-content: space-between;
+}
+
+.country-phone-code{
+    width: 40%;
+}
+
+.country-phone-number{
+    width: 55%;
+}
+

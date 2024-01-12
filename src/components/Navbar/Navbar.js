@@ -7,7 +7,7 @@ const Navbar = () => {
       <div>
          <img className='logo' src="https://www.dollargeneral.com/content/dam/dg/assets/header-navigation/desktoplogo.png" alt="logo-pic" />
          </div>
-         <div>
+         <div className='navbar-div'>
          <ul>
           <li>Home</li>
           <li>Find Locations</li>

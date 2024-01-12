@@ -3,12 +3,15 @@ import "./ReceiverDetails.css";
 
 import SearchIcon from "@mui/icons-material/Search";
 
+
 const ReceiverForm = () => {
+    
   const [input, setInput] = useState("+1");
   const [results, setResults] = useState();
   const [data, setData] = useState();
   const [states, setStates] = useState();
   const [filteredStates, setFilteredStates] = useState()
+  const [middleName, setMiddleName] = useState(false)
   const fetchCode = async (value) => {
     const data = await fetch("http://localhost:3000/country");
     const json = await data.json();
@@ -61,6 +64,10 @@ const ReceiverForm = () => {
     setData(state.name)
   }
 
+  const handleCheckbox = () => {
+    setMiddleName(!middleName)
+  }
+
   return (
     <div className="receiver-form">
       <form>
@@ -70,9 +77,12 @@ const ReceiverForm = () => {
         </div>
         <div className="middle-name">
           <label>
-            <input type="checkbox" />I have middle/second last name.
+            <input type="checkbox" onChange={handleCheckbox} />I have middle/second last name.
           </label>
         </div>
+        {middleName &&  <div className="middleName">
+          <input type="text" placeholder="Middle Name" />
+        </div>}
         <div className="email">
           <input type="text" placeholder="Enter email (optional)" />
         </div>

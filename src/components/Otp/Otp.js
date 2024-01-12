@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 
 
 let currentOtpIndex = 0;
-const Otp = () => {
+const Otp = ({ otp, setOtp }) => {
 
-  const [otp, setOtp] = useState(new Array(6).fill(""));
+  // const [otp, setOtp] = useState(new Array(6).fill(""));
   const [activeOtpIndex, setActiveOtpIndex] = useState(0);
   const inputRef = useRef(null);
 

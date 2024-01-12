@@ -42,7 +42,7 @@
     margin-top: 65px;
 }
 
-.first-name>input::placeholder,.email>input::placeholder,.city-name>input::placeholder,.state-search>input::placeholder{
+.first-name>input::placeholder,.email>input::placeholder,.city-name>input::placeholder,.state-search>input::placeholder,.middleName>input::placeholder{
     font-size: 20px;
     font-weight: 500;
 }
@@ -67,7 +67,7 @@
   width: 3%;
 }
 
-.email{
+.email,.middleName{
     margin-top: 60px;
 }
 
@@ -102,7 +102,11 @@
     overflow-y: scroll;
     position: absolute;
     width: 100%;
- 
+    z-index: 10;
+}
+
+.result:active{
+    border: 1px solid black;
 }
 
 .result2{
@@ -138,6 +142,8 @@
 
 .state{
     margin-top: 60px;
+    /* position: relative;
+    z-index: -5; */
 }
 
 .state-result{

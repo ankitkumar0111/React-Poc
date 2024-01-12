@@ -4,12 +4,15 @@ import Search from "./Search";
 import SearchIcon from '@mui/icons-material/Search';
 import DateSelector from "./DateSelector";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateFormData } from "../../utils/formDataSlice";
 
 const HomeForm = () => {
   const [countryCode , setCountryCode] = useState(null)
   const [date, setDate] = useState(null)
   const [phoneNumber, setPhoneNumber] = useState(null)
   const navigate = useNavigate()
+  const dispatch = useDispatch();
   // const [results, setResults] = useState([]);
   // const [input, setInput] = useState("");
   // const [selectedResult, setSelectedResult] = useState(null);
@@ -74,25 +77,28 @@ const HomeForm = () => {
       date: date?.toString(),
       phoneNumber: phoneNumber
     }
-    try{
-      const response = await fetch('http://localhost:3000/users',{
-        method: "POST",
-        headers: {
-          "Content-type" : "application/json",
-        },
-        body: JSON.stringify(formData)
-      })
-      if(response.ok){
-        alert("Form Submitted Sucesfully")
-        navigate("/home/otp")
-      }
-      else{
-        alert("Form not Submitted")
-      }
-    }
-    catch(error){
-      console.log("Error",error);
-    }
+    dispatch(updateFormData(formData))
+    alert("Form Submitted Sucesfully")
+     navigate("/home/otp")
+    // try{
+    //   const response = await fetch('http://localhost:3000/users',{
+    //     method: "POST",
+    //     headers: {
+    //       "Content-type" : "application/json",
+    //     },
+    //     body: JSON.stringify(formData)
+    //   })
+    //   if(response.ok){
+    //     alert("Form Submitted Sucesfully")
+    //     navigate("/home/otp")
+    //   }
+    //   else{
+    //     alert("Form not Submitted")
+    //   }
+    // }
+    // catch(error){
+    //   console.log("Error",error);
+    // }
     
   }
 
