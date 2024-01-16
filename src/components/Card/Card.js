@@ -42,24 +42,24 @@ const useStyles = makeStyles({
 //     visibility: 'hidden',
 //   },
   cardClicked: {
-    // '& $tickSymbol': {
-    //   visibility: 'visible',
-    //   position: "absolute"
-    // },
+    '& $tickSymbol': {
+      visibility: 'visible',
+      position: "absolute"
+    },
     border: "2px solid black",
     // position:"relative"
   },
-  tickSymbol: {
-    position: 'absolute',
-    top: '8px',
-    right: '8px',
-    fontSize: '24px',
-    color: 'green',
-    visibility: 'hidden',
-  },
-  tickVisible: {
-    visibility: 'visible',
-  },
+  // tickSymbol: {
+  //   position: 'absolute',
+  //   top: '8px',
+  //   right: '8px',
+  //   fontSize: '24px',
+  //   color: 'green',
+  //   visibility: 'hidden',
+  // },
+  // tickVisible: {
+  //   visibility: 'visible',
+  // },
 });
 
 const BasicCard = ({ name, icon,isSelected, onClick }) => {
@@ -72,9 +72,9 @@ const BasicCard = ({ name, icon,isSelected, onClick }) => {
   return (
     <Card className={`${classes.root} ${isSelected ? classes.cardClicked  : ""}`} onClick={onClick}>
        {/* <div className={classes.tickSymbol}>&#10003;</div> */}
-       {isSelected && (
+       {/* {isSelected && (
         <DoneIcon className={`${classes.tickSymbol} ${classes.tickVisible}`} />
-      )}
+      )} */}
       <CardContent className={classes.content}>
         <div className={classes.icon}>
         {icon &&

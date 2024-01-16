@@ -9,6 +9,7 @@ import { makeStyles } from "@mui/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import FormDialog from "./DialogBox";
 import LocalAtmOutlinedIcon from "@mui/icons-material/LocalAtmOutlined";
+import { useNavigate } from 'react-router-dom'
 
 const useStyles = makeStyles({
   icon: {
@@ -38,6 +39,8 @@ const Details = () => {
   const [receiverCurrency, setReceiverCurrency] = useState("INR");
   const [receiverCountryImage, setReceiverCountryImage] = useState("in");
   const [receiverMoneyInput, setReceiverMoneyInput] = useState();
+
+ const navigate = useNavigate()
 
   const fetchSenderCode = async (value) => {
     const filteredData = senderCountries.filter((country) => {
@@ -148,6 +151,10 @@ const Details = () => {
     }
   };
 
+  const handleSubmit = () => {
+    navigate("/home/receiver-add")
+  }
+
   return (
     <div>
       <div className="sender-div">
@@ -208,6 +215,7 @@ const Details = () => {
                         )
                       }
                       checked={selectedSenderCountry === country.name}
+                      required
                     />
                     <img
                       src={`https://flagcdn.com/w40/${country.iso2.toLowerCase()}.png`}
@@ -286,6 +294,7 @@ const Details = () => {
                         )
                       }
                       checked={selectedReceiverCountry === country.name}
+                      required
                     />
                     <img
                       src={`https://flagcdn.com/w40/${country.iso2.toLowerCase()}.png`}
@@ -389,7 +398,7 @@ const Details = () => {
           <p>5.00 USD</p>
         </div>
       </div>
-      <div className="button-details">
+      <div className="button-details" onClick={handleSubmit}>
         <button type="submit">Continue</button>
       </div>
     </div>
