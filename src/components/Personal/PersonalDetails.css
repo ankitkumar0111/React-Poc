@@ -13,7 +13,7 @@
     border-radius: 5px;
 }
 
-.personal-paragraph>p,span{
+.personal-paragraph>p,.personal-paragraph>span{
     margin: 0px;
     margin-left: 10px;
     margin-top: 7px;

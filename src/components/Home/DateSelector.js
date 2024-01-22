@@ -28,16 +28,21 @@
 import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+// import { format } from "date-fns";
 import "./Home.css"
 
-const DateSelector = ({ date ,setDate}) => {
+const DateSelector = ({ date ,setDate, setDateError}) => {
 //   const [startDate, setStartDate] = useState();
   const handleChange = (date) => {
     console.log('haeh',date);
     setDate(date)
-    // handleDateChange(date)
-    // console.log("date",startDate);
+    // if (!date) {
+    //   setDateError('Date is required');
+    // } else {
+    //   setDateError('');
+    // }
   }
+  
 
 //   useEffect(() => {
 //     console.log("Selected Date:", startDate);
@@ -54,7 +59,7 @@ const DateSelector = ({ date ,setDate}) => {
       dropdownMode="select"
       className="date-picker"
       wrapperClassName="datePicker"
-      required
+      dateFormat="MM/dd/yyyy"
     />
   );
 };

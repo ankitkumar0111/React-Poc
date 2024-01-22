@@ -10,6 +10,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import FormDialog from "./DialogBox";
 import LocalAtmOutlinedIcon from "@mui/icons-material/LocalAtmOutlined";
 import { useNavigate } from 'react-router-dom'
+import { isFieldEmpty } from "../../utils/isFieldEmpty";
 
 const useStyles = makeStyles({
   icon: {
@@ -20,6 +21,8 @@ const useStyles = makeStyles({
 const Details = () => {
   const classes = useStyles();
   const [promoCode, setPromoCode] = useState();
+  const [senderError, setSenderError] = useState('')
+  const [receiverError, setReceiverError] = useState('')
   const [correct, setCorrect] = useState(false)
   const [senderInput, setSenderInput] = useState(null);
   const [senderCountries, setSenderCountries] = useState([]);
@@ -27,7 +30,7 @@ const Details = () => {
   const [selectedSenderCountry, setSelectedSenderCountry] = useState("USA");
   const [senderCurrency, setSenderCurrency] = useState("USD");
   const [senderCountryImage, setSenderCountryImage] = useState("us");
-  const [senderMoneyInput, setSenderMoneyInput] = useState();
+  const [senderMoneyInput, setSenderMoneyInput] = useState('');
 
   const [receiverInput, setReceiverInput] = useState(null);
   const [receiverCountries, setReceiverCountries] = useState([]);
@@ -38,7 +41,7 @@ const Details = () => {
     useState("India");
   const [receiverCurrency, setReceiverCurrency] = useState("INR");
   const [receiverCountryImage, setReceiverCountryImage] = useState("in");
-  const [receiverMoneyInput, setReceiverMoneyInput] = useState();
+  const [receiverMoneyInput, setReceiverMoneyInput] = useState('');
 
  const navigate = useNavigate()
 
@@ -88,6 +91,7 @@ const Details = () => {
   const handleSenderMoneyInput = (e) => {
     const { value } = e.target;
     setSenderMoneyInput(value);
+    setSenderError('')
     let floatValue = parseFloat(value);
     let formattedFloat = floatValue.toFixed(4);
     fetchSenderCurrencyRate(formattedFloat);
@@ -139,6 +143,7 @@ const Details = () => {
   const handleReceiverMoneyInput = (e) => {
     const { value } = e.target;
     setReceiverMoneyInput(value);
+    setReceiverError('')
     let floatValue = parseFloat(value);
     let formattedFloat = floatValue.toFixed(4);
     console.log(formattedFloat);
@@ -151,12 +156,33 @@ const Details = () => {
     }
   };
 
-  const handleSubmit = () => {
-    navigate("/home/receiver-add")
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(validateForm()){
+      alert("Form submitted successfully")
+      navigate("/home/receiver-add")
+    }
+    console.log("abcd");
+  }
+
+  const validateForm = () => {
+    const senderValidation = isFieldEmpty(senderMoneyInput,"Field is required")
+
+    const receiverValidation = isFieldEmpty(receiverMoneyInput, "Field is required")
+    if(!senderValidation.isValid){
+      setSenderError(senderValidation.errorMessage)
+      return false;
+    }
+    if(!receiverValidation.isValid){
+      setReceiverError(receiverValidation.errorMessage)
+      return false;
+    }
+    return true;
   }
 
   return (
     <div>
+       <form onSubmit={handleSubmit}>
       <div className="sender-div">
         <Accordion
           sx={{
@@ -197,8 +223,8 @@ const Details = () => {
                 placeholder="Search..."
                 value={senderInput}
                 onChange={handleSenderCountry}
-                required
               />
+              
               <SearchIcon className="search-icon" />
             </div>
             <div className="country-list">
@@ -217,6 +243,7 @@ const Details = () => {
                       checked={selectedSenderCountry === country.name}
                       required
                     />
+                    
                     <img
                       src={`https://flagcdn.com/w40/${country.iso2.toLowerCase()}.png`}
                       alt={senderCountries.name}
@@ -276,7 +303,6 @@ const Details = () => {
                 placeholder="Search..."
                 value={receiverInput}
                 onChange={handleReceiverCountry}
-                required
               />
               <SearchIcon className="search-icon" />
             </div>
@@ -320,6 +346,7 @@ const Details = () => {
         <div className="sender-money-details">
           <div className="sender-details-upper">
             <input
+            type="number"
               placeholder="You're sending"
               value={senderMoneyInput}
               onChange={handleSenderMoneyInput}
@@ -328,6 +355,7 @@ const Details = () => {
               <p className="sender-currency">{senderCurrency}</p>
             </div>
           </div>
+          {senderError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{senderError}</span>}
           <p className="sender-para">Send up to 800.00 USD</p>
           <ul className="bar">
             <li>Pay in Store</li>
@@ -342,14 +370,18 @@ const Details = () => {
         <div className="receiver-money-details">
           <div className="receiver-details-upper">
             <input
+            type="number"
               placeholder="Your receiver gets"
               value={receiverMoneyInput}
               onChange={handleReceiverMoneyInput}
             />
+            
             <div>
               <p className="sender-currency">{receiverCurrency}</p>
             </div>
           </div>
+          {receiverError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{receiverError}</span>}
+          
           <ul className="bar-2">
             <li>Delivery Location</li>
             <div
@@ -398,9 +430,10 @@ const Details = () => {
           <p>5.00 USD</p>
         </div>
       </div>
-      <div className="button-details" onClick={handleSubmit}>
+      <div className="button-details" >
         <button type="submit">Continue</button>
       </div>
+      </form>
     </div>
   );
 };

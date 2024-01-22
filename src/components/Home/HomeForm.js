@@ -6,99 +6,62 @@ import DateSelector from "./DateSelector";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateFormData } from "../../utils/formDataSlice";
+import { isFieldEmpty } from "../../utils/isFieldEmpty";
+import { format } from "date-fns";
 
 const HomeForm = () => {
   const [countryCode , setCountryCode] = useState(null)
   const [date, setDate] = useState(null)
   const [phoneNumber, setPhoneNumber] = useState(null)
+  const [codeError, setCodeError] = useState('')
+  const [phoneError, setPhoneError] = useState('')
+  // const [dateError, setDateError] = useState('')
   const navigate = useNavigate()
   const dispatch = useDispatch();
-  // const [results, setResults] = useState([]);
-  // const [input, setInput] = useState("");
-  // const [selectedResult, setSelectedResult] = useState(null);
-  // const [dateString, setDateString] = useState();
-  // const [message, setMessage] = useState(null);
-  // const handleDate = (e) => {
-  //   let inputDate = e.target.value;
-  //   setDateString(inputDate);
-  //   if (validator.isDate(inputDate)) {
-  //     setMessage("Date is Valid");
-  //     // setMessageColor("green");
-  //   } else {
-  //     setMessage("Please, Enter a valid date!");
-  //     // setMessageColor("red");
-  //   }
-  // };
+  const validateForm = () => {
+    const codeValidation = isFieldEmpty(countryCode.phoneCode, ['notEmpty'], 'Country Code is required');
+  const phoneValidation = isFieldEmpty(phoneNumber, ['notEmpty', 'tenDigits'], 'Phone Number is required and should be 10 digits');
+  // const dateValidation = isFieldEmpty(date, ['notEmpty', 'validDate'], 'Date is required and should be a valid date');
 
-  // const fetchCode = async (value) => {
-  //   const data = await fetch("http://localhost:3000/country");
-  //   const json = await data.json();
-
-  //   const filteredData = json.filter((country) => {
-  //     return (
-  //       country.name.toLowerCase().includes(value.toLowerCase())
-  //       || country.phone_code.includes(value)
-  //       || country.iso2.includes(value)
-  //     );
-  //   });
-  //   setResults(filteredData);
-  //   console.log(results);
-  // };
-  // const handleChange = (value) => {
-  //   setInput(value);
-  //   fetchCode(value);
-  //   console.log(value);
-  // };
-
-  // const handleChange = (e) => {
-  //   const {value} = e.target
-  //   setInput(value)
-  //   fetchCode(value)
-  // }
-
-  // const handleClick = (result) => {
-  //   setSelectedResult(result);
-  // };
-  // const handleCodeChange = (code) => {
-  //   setCountryCode(code)
-  //   console.log("code",countryCode);
-  // }
+    if(!codeValidation.isValid){
+      setCodeError(codeValidation.errorMessage)
+      // console.log("kshfvjfs",coderError);
+      return false;
+    }
+    // console.log("abcd",coderError);
+    if (!phoneValidation.isValid) {
+      setPhoneError(phoneValidation.errorMessage);
+      return false;
+    }
+  
+    // if (!dateValidation.isValid) {
+    //   setDateError(dateValidation.errorMessage);
+    //   return false;
+    // }
+    return true;
+  }
+  
 
   const handleChange = (e) => {
     const { value} = e.target
     setPhoneNumber(value)
+    setPhoneError('')
     // console.log(phoneNumber);
   }
   const handleSubmit = async(e) => {
     e.preventDefault()
-    console.log("Form submitted",countryCode, date,phoneNumber);
+    
     const formData = {
-      countryCode : countryCode,
-      date: date?.toString(),
-      phoneNumber: phoneNumber
-    }
-    dispatch(updateFormData(formData))
+      countryCode: countryCode,
+      date: date ? format(date, "MM/dd/yyyy") : '', // Format the date here
+      phoneNumber: phoneNumber,
+    };
+    console.log("Form submitted",countryCode, date,phoneNumber);
+    if(validateForm()){
+      dispatch(updateFormData(formData))
     alert("Form Submitted Sucesfully")
      navigate("/home/otp")
-    // try{
-    //   const response = await fetch('http://localhost:3000/users',{
-    //     method: "POST",
-    //     headers: {
-    //       "Content-type" : "application/json",
-    //     },
-    //     body: JSON.stringify(formData)
-    //   })
-    //   if(response.ok){
-    //     alert("Form Submitted Sucesfully")
-    //     navigate("/home/otp")
-    //   }
-    //   else{
-    //     alert("Form not Submitted")
-    //   }
-    // }
-    // catch(error){
-    //   console.log("Error",error);
-    // }
+    }
     
   }
 
@@ -108,60 +71,22 @@ const HomeForm = () => {
         <div className="upper-fields">
           <div className="code-search">
             <div className="code-search-input">
-            {/* <div>
-                <img
-                  src={`https://flagcdn.com/w40/${selectedResult?.iso2.toLowerCase()}.png`}
-                  alt=""
-                />
-                 <input
-                type="text"
-                value={`${selectedResult?.phone_code} ${selectedResult?.iso2}`}
-                placeholder={selectedResult === null ? "Country Code" : ""}
-                onClick={(e) => e.target.select()}
-                onChange={handleChange}
-              />
-              </div> */}
-              <Search countryCode={countryCode} setCountryCode={setCountryCode}/>
-              
+              <Search countryCode={countryCode} setCountryCode={setCountryCode} setCodeError={setCodeError}/> 
               <SearchIcon className="search-icon" />
             </div>
-            {/* <div className="result">
-              <div className="result2">
-                {results.map((result, id) => {
-                  return (
-                    <div
-                      key={result.id}
-                      className="result-list"
-                      onClick={() => handleClick(result)}
-                    >
-                    
-                      <img
-                        src={`https://flagcdn.com/w40/${result.iso2.toLowerCase()}.png`}
-                        alt=""
-                      />
-                      <p>
-                        +{result.phone_code} ({result.iso2})
-                      </p>
-                    
-                    </div>
-                  );
-                })}
-              </div>
-            </div> */}
+            {codeError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{codeError}</span>}
+        
           </div>
           <div className="phone-number">
-            <input type="number" placeholder="Phone Number" value={phoneNumber} onChange={handleChange} required/>
+            <input type="number" placeholder="Phone Number" value={phoneNumber} onChange={handleChange} />
+        {phoneError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{phoneError}</span>}
+
           </div>
+         
         </div>
         <div className="lower-field">
-          {/* <input
-            type="date"
-            // value={dateString}
-            placeholder="Date of birth (MM/DD/YYYY)"
-            // onChange={handleDate}
-            max="2023-01-27"
-          /> */}
           <DateSelector date={date} setDate={setDate} />
+          {/* {dateError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{dateError}</span>} */}
           {/* <p>{message}</p> */}
         </div>
         <div className="button">

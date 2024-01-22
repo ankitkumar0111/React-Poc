@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 // import { FiSearch } from "react-icons/fi";
 
-const Search = ({ countryCode, setCountryCode}) => {
+const Search = ({ countryCode, setCountryCode, setCodeError}) => {
     const [data , setData] = useState([])
   const [selectedOption, setSelectedOption] = useState(null);
 //   const jsonData = [
@@ -67,6 +67,7 @@ const options = data.map((country) => ({
 
   const handleChange = (selected) => {
     console.log(selected);
+    setCodeError("")
     const cleanedSelected= {
         iso2: selected.iso2,
         name: selected.name,
@@ -155,7 +156,8 @@ const options = data.map((country) => ({
         // components={{ DropdownIndicator }}
         styles={customStyles}
         filterOption={filterOptions}
-        required
+        
+        // required
       />
     </div>
   );
