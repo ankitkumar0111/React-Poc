@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./ReceiverDetails.css";
-
+import { useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
+import { isFieldEmpty } from "../../utils/isFieldEmpty";
 
 
 const ReceiverForm = () => {
@@ -11,7 +12,18 @@ const ReceiverForm = () => {
   const [data, setData] = useState();
   const [states, setStates] = useState();
   const [filteredStates, setFilteredStates] = useState()
+  const[firstName, setFirstName] = useState()
+  const [lastName, setLastName] = useState()
+  const[email, setEmail] = useState()
+  const[mobileNumber, setMobileNumber] = useState()
   const [middleName, setMiddleName] = useState(false)
+  const [firstError, setFirstError] = useState('')
+  const[lastError, setLastError] = useState('')
+  const[emailError, setEmailError] = useState('')
+  const[mobileError, setMobileError] = useState('')
+  const[codeError, setCodeError] = useState('')
+  const[stateError, setStateError] = useState('')
+  const navigate = useNavigate()
   const fetchCode = async (value) => {
     const data = await fetch("http://localhost:3000/country");
     const json = await data.json();
@@ -40,12 +52,13 @@ const ReceiverForm = () => {
     const { value } = e.target;
     setInput(value);
     fetchCode(value);
+    setCodeError('')
   };
 
   const handleClickCode = (result) => {
     setResults(null);
     // setSelectedResult(result);
-    setInput(result.phone_code);
+    setInput("+" + result.phone_code);
     fetchState(result.iso2);
   };
 
@@ -57,6 +70,7 @@ const ReceiverForm = () => {
       state.name.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredStates(filteredData)
+    setStateError('')
   };
 
   const handleClickState = (state) => {
@@ -68,23 +82,117 @@ const ReceiverForm = () => {
     setMiddleName(!middleName)
   }
 
+  const handleFirstChange = (e) => {
+    const { value } = e.target;
+    setFirstName(value);
+    setFirstError('')
+  }
+
+  const handleLastChange = (e) => {
+    const { value } = e.target;
+    setLastName(value);
+    setLastError('')
+  }
+  
+  const handleEmailChange = (e) => {
+    const { value } = e.target;
+    setEmail(value);
+    setEmailError('')
+  }
+
+  const handleMobileChange = (e) => {
+    const { value } = e.target;
+    setMobileNumber(value);
+    setMobileError('')
+  }
+
+  // const handleCodeChange = (e) => {
+  //   const { value } = e.target;
+  //   setInput(value);
+  //   setCodeError('')
+  // }
+
+  // const handleStateChange = (e) => {
+  //   const { value } = e.target;
+  //   setData(value);
+  //   setStateError('')
+  // }
+
+  const validateForm = () => {
+    const firstNameValidation = isFieldEmpty(firstName, ['notEmpty'], 'First Name is required');
+    const lastNameValidation = isFieldEmpty(lastName, ['notEmpty'], 'Last Name is required');
+    const emailValidation = isFieldEmpty(email,['notEmpty','validEmail'],'Invalid Email Address')
+    const codeValidation = isFieldEmpty(input,['notEmpty'],'Country Code is required')
+    const stateValidation = isFieldEmpty(data,['notEmpty'],'State is required')
+  const mobileValidation = isFieldEmpty(mobileNumber, ['notEmpty', 'tenDigits'], 'Mobile Number is required and should be 10 digits');
+
+  // const dateValidation = isFieldEmpty(date, ['notEmpty', 'validDate'], 'Date is required and should be a valid date');
+
+    if(!firstNameValidation.isValid){
+      setFirstError(firstNameValidation.errorMessage)
+      // console.log("kshfvjfs",coderError);
+      return false;
+    }
+    if(!lastNameValidation.isValid){
+      setLastError(lastNameValidation.errorMessage)
+      // console.log("kshfvjfs",coderError);
+      return false;
+    }
+    if(!emailValidation.isValid){
+      setEmailError(emailValidation.errorMessage)
+      // console.log("kshfvjfs",coderError);
+      return false;
+    }
+    // console.log("abcd",coderError);
+    if (!mobileValidation.isValid) {
+      setMobileError(mobileValidation.errorMessage);
+      return false;
+    }
+    if(!codeValidation.isValid){
+      setCodeError(codeValidation.errorMessage)
+      // console.log("kshfvjfs",coderError);
+      return false;
+    }
+    if(!stateValidation.isValid){
+      setStateError(stateValidation.errorMessage)
+      // console.log("kshfvjfs",coderError);
+      return false;
+    }
+
+    // if (!dateValidation.isValid) {
+    //   setDateError(dateValidation.errorMessage);
+    //   return false;
+    // }
+    return true;
+  }
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    if(validateForm()){
+      navigate("/home/addpersonal")
+    }
+  }
+
   return (
     <div className="receiver-form">
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="first-name">
-          <input type="text" placeholder="First name" required />
-          <input type="text" placeholder="Last name" required />
+          <input type="text" placeholder="First name" value={firstName} onChange={handleFirstChange}/>
+          {firstError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{firstError}</span>}
+          <input type="text" placeholder="Last name" value={lastName} onChange={handleLastChange}/>
+          {lastError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{lastError}</span>}
         </div>
         <div className="middle-name">
           <label>
-            <input type="checkbox" onChange={handleCheckbox} />I have middle/second last name.
+            <input type="checkbox" onChange={handleCheckbox}/>I have middle/second last name.
           </label>
         </div>
         {middleName &&  <div className="middleName">
           <input type="text" placeholder="Middle Name" />
         </div>}
         <div className="email">
-          <input type="text" placeholder="Enter email (optional)" />
+          <input type="text" placeholder="Enter email (optional)" value={email} onChange={handleEmailChange}/>
+          {emailError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{emailError}</span>}
         </div>
         <div className="country-mobile">
           <div className="code-result">
@@ -95,10 +203,11 @@ const ReceiverForm = () => {
                 placeholder="Country Code"
                 value={input}
                 onChange={handleChangeCode}
-                required
               />
               <SearchIcon className="search-icon" />
             </div>
+            {codeError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{codeError}</span>}
+
             <div className="result">
               <div className="result2">
                 {results &&
@@ -110,7 +219,7 @@ const ReceiverForm = () => {
                         onClick={() => handleClickCode(result)}
                       >
                         <p>
-                          +{result.phone_code} ({result.iso2})
+                         { `+${result.phone_code} ${result.iso2}`}
                         </p>
                       </div>
                     );
@@ -118,12 +227,14 @@ const ReceiverForm = () => {
               </div>
             </div>
           </div>
+          <div className="mobile-number">
           <input
-            className="mobile-number"
             type="number"
             placeholder="Mobile number"
-            required
+            onChange={handleMobileChange}
           />
+          {mobileError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{mobileError}</span>}
+          </div>
         </div>
         <div className="city-name">
           <input type="text" placeholder="City or Suburb (Optional)" />
@@ -131,8 +242,9 @@ const ReceiverForm = () => {
         <div className="state">
           <div className="state-result">
             <div className="state-search">
-              <input type="text" placeholder="State" onChange={handleChangeState} value={data} required />
-              <SearchIcon className="search-icon" />
+              <input type="text" placeholder="State" onChange={handleChangeState} value={data}/>
+              {stateError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{stateError}</span>}
+              <SearchIcon className="search-icon"/>
             </div>
             <div className="result">
               <div className="result2">

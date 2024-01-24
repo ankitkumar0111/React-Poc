@@ -28,14 +28,14 @@
     margin-left: 10px;
 }
 
-.country-code-search{
+.country-codes-search{
   display: flex;
   background-color: white;
   width: 50%;
   border-bottom: 2px solid rgb(223, 221, 221);
 }
 
-.country-code-search>input{
+.country-codes-search>input{
   border: none;
   background-color: none;
 }

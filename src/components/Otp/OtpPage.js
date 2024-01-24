@@ -10,7 +10,7 @@ const OtpPage = () => {
     const enteredOtp = otp.join('');
     if(enteredOtp === "234432"){
       alert("OTP verified")
-      navigate("/home/money-details")
+      navigate("/home/moneydetails")
     }
     else{
       alert("OTP incorrect")

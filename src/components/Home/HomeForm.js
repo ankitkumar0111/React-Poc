@@ -19,7 +19,7 @@ const HomeForm = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const validateForm = () => {
-    const codeValidation = isFieldEmpty(countryCode.phoneCode, ['notEmpty'], 'Country Code is required');
+    const codeValidation = isFieldEmpty(countryCode?.phoneCode, ['notEmpty'], 'Country Code is required');
   const phoneValidation = isFieldEmpty(phoneNumber, ['notEmpty', 'tenDigits'], 'Phone Number is required and should be 10 digits');
   // const dateValidation = isFieldEmpty(date, ['notEmpty', 'validDate'], 'Date is required and should be a valid date');
 
@@ -79,7 +79,7 @@ const HomeForm = () => {
           </div>
           <div className="phone-number">
             <input type="number" placeholder="Phone Number" value={phoneNumber} onChange={handleChange} />
-        {phoneError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{phoneError}</span>}
+        {phoneError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px", width:"50%" }}>{phoneError}</span>}
 
           </div>
          

@@ -41,17 +41,18 @@ const appRouter = createBrowserRouter([
         element: <OtpPage/>,
       },
       {
-        path:'/home/receiver-add',
+        path: 'home/moneydetails',
+        element: <Details/>
+      },
+      {
+        path:'/home/addreceiver',
         element: <ReceiverDetails/>
       },
       {
-        path:'/home/sender-info',
+        path:'/home/addpersonal',
         element: <PersonalDetails/>
       },
-      {
-        path: 'home/money-details',
-        element: <Details/>
-      }
+      
     ]
   },
 ])

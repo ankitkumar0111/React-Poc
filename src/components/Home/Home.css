@@ -69,6 +69,8 @@
     width: 100%;
 }
 
+
+
 input{
     font-weight: 600;
     border: none;
@@ -116,6 +118,9 @@ margin-top: -10px;
     justify-content: center;
 }
 
+.phone-number{
+    width: 45%;
+}
 .phone-number>input::-webkit-outer-spin-button,
 .phone-number>input::-webkit-inner-spin-button{
     -webkit-appearance: none;
@@ -204,6 +209,10 @@ margin-top: -10px;
     justify-content: center;
     color: grey;
     margin-top: 70px;
+}
+
+@media screen and (max-width: 600px){
+    
 }
 
 

@@ -75,12 +75,13 @@
     display: flex;
     margin-top: 40px;
     justify-content: space-between;
+    width: 100%;
 }
 
 .code-result{
     position: relative;
-    width: 40%;
-    border-bottom: 2px solid rgb(223, 221, 221);
+    width: 50%;
+    /* border-bottom: 2px solid rgb(223, 221, 221); */
 }
 
 .country-code-search{
@@ -109,6 +110,8 @@
     border: 1px solid black;
 }
 
+
+
 .result2{
  border: 1px solid #ccc;
     border-top: none;
@@ -133,8 +136,16 @@
 }
 
 .mobile-number{
-    width: 55%;
+    width: 45%;
+    margin-top: 7px;
 }
+
+.mobile-number>input::placeholder{
+    font-size: 18px;
+    color: rgb(146, 144, 144);
+}
+
+
 
 .city-name{
     margin-top: 60px;

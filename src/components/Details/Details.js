@@ -87,14 +87,19 @@ const Details = () => {
     const json = await data.json();
     console.log(json);
     setReceiverMoneyInput(json.conversion_result);
+    
+    console.log("abcfgjkj",receiverError)
   };
   const handleSenderMoneyInput = (e) => {
     const { value } = e.target;
     setSenderMoneyInput(value);
     setSenderError('')
+    setReceiverError('')
+   console.log(receiverError);
     let floatValue = parseFloat(value);
     let formattedFloat = floatValue.toFixed(4);
     fetchSenderCurrencyRate(formattedFloat);
+    
   };
 
   //Receiver functions
@@ -143,6 +148,7 @@ const Details = () => {
   const handleReceiverMoneyInput = (e) => {
     const { value } = e.target;
     setReceiverMoneyInput(value);
+    setSenderError('')
     setReceiverError('')
     let floatValue = parseFloat(value);
     let formattedFloat = floatValue.toFixed(4);
@@ -158,19 +164,26 @@ const Details = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(validateForm()){
+    // if(senderMoneyInput){
+    //   setSenderError('')
+    // }
+    // if(receiverMoneyInput){
+    //   setReceiverError('')
+    // }
+    // if(validateForm()){
       alert("Form submitted successfully")
-      navigate("/home/receiver-add")
-    }
+      navigate("/home/addreceiver")
+    // }
     console.log("abcd");
   }
 
   const validateForm = () => {
-    const senderValidation = isFieldEmpty(senderMoneyInput,"Field is required")
+    const senderValidation = isFieldEmpty(senderMoneyInput,['notEmpty'],"Field is required")
 
-    const receiverValidation = isFieldEmpty(receiverMoneyInput, "Field is required")
+    const receiverValidation = isFieldEmpty(receiverMoneyInput,['notEmpty'], "Field is required")
     if(!senderValidation.isValid){
       setSenderError(senderValidation.errorMessage)
+      
       return false;
     }
     if(!receiverValidation.isValid){
@@ -217,7 +230,7 @@ const Details = () => {
             </div>
           </AccordionSummary>
           <AccordionDetails>
-            <div className="country-code-search">
+            <div className="country-codes-search">
               <input
                 type="text"
                 placeholder="Search..."
