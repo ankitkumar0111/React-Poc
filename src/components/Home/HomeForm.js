@@ -45,8 +45,9 @@ const HomeForm = () => {
   const handleChange = (e) => {
     const { value} = e.target
     setPhoneNumber(value)
+
     setPhoneError('')
-    // console.log(phoneNumber);
+    console.log(phoneNumber);
   }
   const handleSubmit = async(e) => {
     e.preventDefault()

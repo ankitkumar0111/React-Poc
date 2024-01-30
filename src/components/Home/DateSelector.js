@@ -34,7 +34,7 @@ import "./Home.css"
 const DateSelector = ({ date ,setDate, setDateError}) => {
 //   const [startDate, setStartDate] = useState();
   const handleChange = (date) => {
-    console.log('haeh',date);
+    console.log(date);
     setDate(date)
     // if (!date) {
     //   setDateError('Date is required');

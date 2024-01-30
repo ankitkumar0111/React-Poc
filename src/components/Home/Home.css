@@ -212,7 +212,62 @@ margin-top: -10px;
 }
 
 @media screen and (max-width: 600px){
+    .upper-box{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: auto;
+        height: 313px;
+    }
     
+    .heading-box{
+        width: 100%;
+        background-color: #FFF200;
+        height: 45%;
+    }
+    
+    .heading{
+        font-size: 30px;
+        padding: 0px;
+        /* padding-left: 46px; */
+        text-align: center;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        /* margin-left: 55px; */
+        font-weight: 500;
+        /* padding-left: 31px; */
+        width: 50%;
+       
+        /* font-weight: 700;
+        font-size: 35px;
+        display: flex;
+        padding: 35px;
+        width: 58%;
+        margin-top: 50px; */
+    }
+    
+    .home-pic{
+        width: 100%;
+        padding: 0;
+        height: 45%;
+        object-fit: cover;
+    }
+
+    .first-line{
+        margin-top: 10px;
+        margin-left: 0px;
+        /* padding: 1px; */
+        font-size: 28px;
+        font-weight: 600;
+    }
+
+    .cards{
+        display: flex;
+        flex-direction: column;
+        margin-top: 0px;
+        margin-left: 25px;
+    }
 }
 
 

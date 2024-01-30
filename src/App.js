@@ -17,7 +17,7 @@ const AppLayout = () => {
   return (
     // <LocalizationProvider dateAdapter={AdapterDateFns}>
     <Provider store={appStore}>
-    <div>
+    <div style={{width: "100"}}>
     <Navbar/>
     <Outlet/>
     </div>

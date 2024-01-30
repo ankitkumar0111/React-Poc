@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <div className='navbar'>
       
-      <div>
+      <div style={{width: "45%"}}>
          <img className='logo' src="https://www.dollargeneral.com/content/dam/dg/assets/header-navigation/desktoplogo.png" alt="logo-pic" />
          </div>
          <div className='navbar-div'>
