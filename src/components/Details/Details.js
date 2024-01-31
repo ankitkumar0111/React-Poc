@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -96,11 +96,20 @@ const Details = () => {
     setSenderError('')
     setReceiverError('')
    console.log(receiverError);
-    let floatValue = parseFloat(value);
+    
+    console.log(senderMoneyInput);
+    console.log(receiverMoneyInput);
+  };
+
+  useEffect(() => {
+    if(senderMoneyInput){
+      let floatValue = parseFloat(senderMoneyInput);
     let formattedFloat = floatValue.toFixed(4);
     fetchSenderCurrencyRate(formattedFloat);
-    
-  };
+    }else{
+      setReceiverMoneyInput(0)
+    }
+  },[senderMoneyInput])
 
   //Receiver functions
   const fetchReceiverCode = async (value) => {
@@ -435,7 +444,7 @@ const Details = () => {
         <div className="apply">
           {/* <a href="/">Apply Promo Code</a> */}
           <FormDialog promoCode={promoCode} setPromoCode={setPromoCode} setCorrect={setCorrect}/>
-          {promoCode !== "5USDOFF"? <p>-0.00 USD</p> : <p>-5.00 USD</p>}
+          {correct ? <p>-5.00 USD</p> : <p>0.00 USD</p>}
           
         </div>
         <div className="total">

@@ -32,11 +32,14 @@ export default function FormDialog({ promoCode, setPromoCode, setCorrect}) {
   };
 
   const handleSubmit =() => {
-    if(promoCode === "5USDOFF"){
-      return handleClose()
-        // setCorrect(true)
-
+    if(promoCode){
+      if(promoCode === "5USDOFF"){
+        setCorrect(true)
     }
+    handleClose()
+    }
+   
+   
   }
 
   const handleChange = (e) => {

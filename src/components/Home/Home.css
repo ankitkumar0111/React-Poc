@@ -64,8 +64,7 @@
 
 .upper-fields{
     display: flex;
-    justify-content: space-between;
-    
+    flex-direction: column;
     width: 100%;
 }
 
@@ -92,7 +91,7 @@ input{
 
 .code-search{
     position: relative;
-    width: 50%;
+    width: 100%;
 }
 
 .code-search-input{
@@ -101,7 +100,6 @@ input{
 background-color: white;
 border-bottom:  2px solid rgb(223, 221, 221);
 margin-top: -10px;
-/* position: relative */
 }
 
 .code-search-input>input{
@@ -119,7 +117,8 @@ margin-top: -10px;
 }
 
 .phone-number{
-    width: 45%;
+    width: 100%;
+    margin-top: 30px;
 }
 .phone-number>input::-webkit-outer-spin-button,
 .phone-number>input::-webkit-inner-spin-button{
@@ -255,10 +254,10 @@ margin-top: -10px;
     }
 
     .first-line{
-        margin-top: 10px;
+        margin-top: 0px;
         margin-left: 0px;
         /* padding: 1px; */
-        font-size: 28px;
+        font-size: 22px;
         font-weight: 600;
     }
 
@@ -266,7 +265,95 @@ margin-top: -10px;
         display: flex;
         flex-direction: column;
         margin-top: 0px;
-        margin-left: 25px;
+        margin-left: 0px;
+        width: 100%;
+    }
+
+    .second-line{
+        margin-top: 25px;
+        margin-left: 0px;
+        font-size: 22px;
+        font-weight: 600;
+    }
+
+    .container{
+        margin-top: 20px;
+        margin-left: 8px;
+        width: 100%;
+    }
+
+    .upper-fields{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .code-search{
+        position: relative;
+        width: 100%;
+    }
+    
+    .code-search-input{
+        display: flex;
+        justify-content: space-between;
+    background-color: white;
+    border-bottom:  2px solid rgb(223, 221, 221);
+    margin-top: 0px;
+    }
+
+    input{
+        padding: 0px;
+    }
+    
+    .search-icon{
+        color: rgb(36, 173, 227);
+        margin-top: 10px;
+    }
+    
+    .flag-code{
+        display: flex;
+        justify-content: center;
+    }
+    
+    .phone-number{
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .lower-field{
+        margin-top: 30px;
+    }
+    
+    .lower-field>input{
+        width: 100%;
+    }
+    
+    .datePicker{
+        width: 100%;
+    }
+    .button{
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+    }
+    
+    .button>button{
+        cursor: pointer;
+        background-color: #FFF200;
+        border: 1px solid #FFF200;
+        border-radius: 30px;
+        color: black;
+        width: 80%;
+        padding: 7px;
+        font-weight: 600;
+        font-size: 15px;
+    }
+    
+    .third-line{
+        display: flex;
+        justify-content: center;
+        color: grey;
+        margin-top: 50px;
     }
 }
 

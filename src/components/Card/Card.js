@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
-    width: "320px",
+    width: "90%",
     height: "120px",
     marginLeft: 40,
     boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2) !important",
@@ -47,7 +47,7 @@ const useStyles = makeStyles({
     },
     border: "2px solid black",
     // position:"relative"
-  },
+  }
   // tickSymbol: {
   //   position: 'absolute',
   //   top: '8px',
