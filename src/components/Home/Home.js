@@ -4,6 +4,7 @@ import BasicCard from "../Card/Card";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import PaymentsOutlinedIcon from "@mui/icons-material/PaymentsOutlined";
 import HomeForm from "./HomeForm";
+
 // import DoneIcon from '@mui/icons-material/Done'
 
 const Home = () => {
@@ -31,6 +32,7 @@ const Home = () => {
     // console.log("Card Clicked")
   }
   return (
+    <>
     <div className="home">
       <div className="upper-box">
         <div className="heading-box">
@@ -59,6 +61,8 @@ const Home = () => {
         2023 Western Union Holdings, Inc. All Rights Reserved
       </p>
     </div>
+     
+     </>
   );
 };
 

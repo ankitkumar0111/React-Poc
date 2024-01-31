@@ -8,6 +8,9 @@ import { useDispatch } from "react-redux";
 import { updateFormData } from "../../utils/formDataSlice";
 import { isFieldEmpty } from "../../utils/isFieldEmpty";
 import { format } from "date-fns";
+import {  ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const HomeForm = () => {
   const [countryCode , setCountryCode] = useState(null)
@@ -60,13 +63,14 @@ const HomeForm = () => {
     console.log("Form submitted",countryCode, date,phoneNumber);
     if(validateForm()){
       dispatch(updateFormData(formData))
-    alert("Form Submitted Sucesfully")
-     navigate("/home/otp")
+      toast.success("Details are correct")
+      navigate("/home/otp")
     }
     
   }
 
   return (
+    <>
     <div className="container">
       <form onSubmit={handleSubmit}>
         <div className="upper-fields">
@@ -94,7 +98,10 @@ const HomeForm = () => {
           <button type="submit">Continue</button>
         </div>
       </form>
+      {/* <ToastContainer/> */}
     </div>
+  
+    </>
   );
 };
 

@@ -20,8 +20,10 @@ const AppLayout = () => {
     <div style={{width: "100"}}>
     <Navbar/>
     <Outlet/>
+   
     </div>
     </Provider>
+  
     // </LocalizationProvider>
   )
 }

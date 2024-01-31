@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import "./OtpPage.css"
 import Otp from './Otp'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const OtpPage = () => {
   const navigate = useNavigate();
@@ -9,11 +11,11 @@ const OtpPage = () => {
   const handleSubmit = () => {
     const enteredOtp = otp.join('');
     if(enteredOtp === "234432"){
-      alert("OTP verified")
+     toast.success("OTP verifed successfully")
       navigate("/home/moneydetails")
     }
     else{
-      alert("OTP incorrect")
+     toast.error("Incorrect OTP")
       setOtp(new Array(6).fill(""));
     }
   }
@@ -29,6 +31,7 @@ const OtpPage = () => {
        <div className='submit-button'>
         <button onClick={handleSubmit}>Submit</button>
        </div>
+       
     </div>
   )
 }
