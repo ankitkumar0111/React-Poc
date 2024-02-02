@@ -5,6 +5,10 @@ import Select from "react-select";
 const Search = ({ countryCode, setCountryCode, setCodeError}) => {
     const [data , setData] = useState([])
   const [selectedOption, setSelectedOption] = useState(null);
+
+  const DropdownIndicator = () => null;
+
+  const IndicatorSeparator = () => null;
 //   const jsonData = [
 //     {
 //       id: 1,
@@ -106,7 +110,7 @@ const options = data.map((country) => ({
     //    borderBottom: "2px solid #ccc",
         boxShadow: "none", 
       // border: state.isFocused ? "1px solid blue" : "1px solid #ccc",
-      width: "200px", 
+      width: "250px", 
         minHeight: "34px",
       // "&:hover": {
       //   border: "1px solid blue" 
@@ -114,7 +118,7 @@ const options = data.map((country) => ({
     }),
     menu: (provided, state) => ({
       ...provided,
-      width: "345px" ,
+      width: "400px" ,
       zIndex:"10"
 //    border: state.isFocused ? "1px solid blue" : "1px solid #ccc",
 //    border: state.
@@ -153,7 +157,8 @@ const options = data.map((country) => ({
         onChange={handleChange}
         placeholder="Country Code"
         isSearchable={true}
-        // components={{ DropdownIndicator }}
+        components={{ DropdownIndicator,
+        IndicatorSeparator }}
         styles={customStyles}
         filterOption={filterOptions}
         

@@ -118,7 +118,7 @@ margin-top: -10px;
 
 .phone-number{
     width: 100%;
-    margin-top: 30px;
+    margin-top: 40px;
 }
 .phone-number>input::-webkit-outer-spin-button,
 .phone-number>input::-webkit-inner-spin-button{
@@ -175,7 +175,7 @@ margin-top: -10px;
 } */
 
 .lower-field{
-    margin-top: 60px;
+    margin-top: 49px;
 }
 
 .lower-field>input{

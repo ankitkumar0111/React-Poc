@@ -47,7 +47,7 @@ const useStyles = makeStyles({
     },
     border: "2px solid black",
     // position:"relative"
-  }
+  },
   // tickSymbol: {
   //   position: 'absolute',
   //   top: '8px',
@@ -59,6 +59,18 @@ const useStyles = makeStyles({
   // tickVisible: {
   //   visibility: 'visible',
   // },
+  '@media (max-width: 600px)': {
+    root: {
+      width: '80%',
+      marginLeft: 10,
+      marginTop: 25,
+      height: 90,
+    },
+    name: {
+      fontSize: 16,
+      padding: 4,
+    },
+  },
 });
 
 const BasicCard = ({ name, icon,isSelected, onClick }) => {
