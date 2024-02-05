@@ -9,8 +9,8 @@ const PersonalDetails = () => {
     <h2 className='receiver-heading'><ArrowBackSharpIcon color='primary' sx={{marginRight:"4px"}}/>Personal details</h2>
     <h3 className='personal-info'>Personal Information</h3>
 <div className='personal-paragraph'>
-    <p>Make sure the information matches the ID you'll use at the agent </p>
-    <span>location</span>
+    <p>Make sure the information matches the ID you'll use at the agent location</p>
+    
 </div>
 <PersonalForm/>
 </div>

@@ -5,15 +5,17 @@
 }
 
 .personal-paragraph{
+    width: 100%;
     margin: 0px;
     background-color: #21ffff;
-    height: 70px;
+    height: 80px;
     margin-top: -5px;
     border: 1px solid #21ffff;
     border-radius: 5px;
 }
 
-.personal-paragraph>p,.personal-paragraph>span{
+.personal-paragraph>p{
+    width: 90%;
     margin: 0px;
     margin-left: 10px;
     margin-top: 7px;
@@ -31,6 +33,7 @@
 
 .personal-form{
     margin-top: 15px;
+    width: 100%;
 }
 
 .first-name-2>input,.address-fields>input,.country-phone>input{
@@ -69,4 +72,102 @@
 .country-phone-number{
     width: 55%;
 }
+
+@media screen and (max-width:900px) {
+    .personal-info{
+        margin-top: 30px;
+        font-size: 21px;
+        font-weight: 600;
+    }
+    .personal-paragraph{
+        width: 100%;
+        margin: 0px;
+        background-color: #21ffff;
+        height: 75px;
+        margin-top: 0px;
+        border: 1px solid #21ffff;
+        border-radius: 5px;
+    }
+    
+    .personal-paragraph>p{
+        width: 90%;
+        margin: 0px;
+        margin-left: 10px;
+        margin-top: 5px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .personal-form{
+        margin-top: 0px;
+        width: 100%;
+    }
+
+    .first-name-2>input,.address-fields>input,.country-phone>input{
+        margin-top: 60px;
+    }
+}
+
+
+@media screen and (max-width:700px) {
+    .personal-info{
+        margin-top: 30px;
+        font-size: 19px;
+        font-weight: 600;
+    }
+    .personal-paragraph{
+        width: 100%;
+        margin: 0px;
+        background-color: #21ffff;
+        height: 86px;
+        margin-top: 0px;
+        border: 1px solid #21ffff;
+        border-radius: 5px;
+    }
+    
+    .personal-paragraph>p{
+        width: 90%;
+        margin: 0px;
+        margin-left: 10px;
+        margin-top: 5px;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    .first-name-2>input,.address-fields>input,.country-phone>input{
+        margin-top: 45px;
+    }
+
+    .first-name-2>input::placeholder,.address-fields>input::placeholder,.dob>input::placeholder,.country-phone>input::placeholder{
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .country-phone{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .country-phone-code{
+        width: 100%;
+    }
+    
+    .country-phone-number{
+        width: 100%;
+    }
+
+    .address-heading{
+        font-size: 22px;
+        font-weight: 600;
+        margin-top: 30px;
+        margin-bottom: -25px;
+    }
+
+    .dob>input{
+        margin-top: 45px;
+    }
+    
+}
+
+
 

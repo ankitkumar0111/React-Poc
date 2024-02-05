@@ -8,14 +8,14 @@ import PersonalDetails from './components/Personal/PersonalDetails';
 import { Provider } from "react-redux"
 import appStore from './utils/appStore';
 import Details from './components/Details/Details';
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 
 
 
 const AppLayout = () => {
   return (
-    // <LocalizationProvider dateAdapter={AdapterDateFns}>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
     <Provider store={appStore}>
     <div style={{width: "100"}}>
     <Navbar/>
@@ -24,7 +24,7 @@ const AppLayout = () => {
     </div>
     </Provider>
   
-    // </LocalizationProvider>
+    </LocalizationProvider>
   )
 }
 

@@ -102,7 +102,7 @@
     width: 100px;
 }
  
-@media (min-width:1201px){
+@media (min-width:700px){
  
     .wu-small-logo-div{
         display: none;

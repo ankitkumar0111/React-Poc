@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
-    width: "90%",
+    width: "37%",
     height: "120px",
     marginLeft: 40,
     boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2) !important",
@@ -59,7 +59,7 @@ const useStyles = makeStyles({
   // tickVisible: {
   //   visibility: 'visible',
   // },
-  '@media (max-width: 600px)': {
+  '@media (max-width: 700px)': {
     root: {
       width: '80%',
       marginLeft: 10,
