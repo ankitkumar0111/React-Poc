@@ -57,7 +57,7 @@ const HomeForm = () => {
     
     const formData = {
       countryCode: countryCode,
-      date: date ? format(date, "MM/dd/yyyy") : '', // Format the date here
+      date: date , // Format the date here
       phoneNumber: phoneNumber,
     };
     console.log("Form submitted",countryCode, date,phoneNumber);

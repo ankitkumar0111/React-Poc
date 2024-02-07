@@ -15,7 +15,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 
 const AppLayout = () => {
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
+    
     <Provider store={appStore}>
     <div style={{width: "100"}}>
     <Navbar/>
@@ -24,7 +24,7 @@ const AppLayout = () => {
     </div>
     </Provider>
   
-    </LocalizationProvider>
+   
   )
 }
 
