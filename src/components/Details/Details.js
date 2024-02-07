@@ -14,8 +14,18 @@ import { isFieldEmpty } from "../../utils/isFieldEmpty";
 
 const useStyles = makeStyles({
   icon: {
-    marginLeft: "-450px",
+    marginLeft: "-360px",
   },
+  '@media (max-width: 1050px)': {
+   icon: {
+    marginLeft: "-300px"
+   }
+  },
+  '@media (max-width: 900px)': {
+    icon: {
+     marginLeft: "-225px"
+    }
+   },
 });
 
 const Details = () => {
@@ -215,7 +225,7 @@ const Details = () => {
   }
 
   return (
-    <div>
+    <div className="mainClass">
        <form onSubmit={handleSubmit}>
       <div className="sender-div">
         <Accordion

@@ -1,4 +1,6 @@
-
+.mainClass{
+  overflow-x: hidden;
+}
 
 .sender-country{
     display: flex;
@@ -275,3 +277,29 @@
   width: 40% !important;
   height: 40% !important;
 } */
+
+@media screen and (max-width: 942px){
+
+  .bar>li:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: '';
+    border-left: 2px solid rgb(139, 137, 137);
+    margin-left: 5px;
+    height: 125%;
+  }
+  .bar-2 >li:last-of-type:after {
+    top: -199%;
+  }
+
+  .bar-2>li:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: '';
+    border-left: 2px solid rgb(139, 137, 137);
+    margin-left: 5px;
+    height: 278%;
+  }
+}
