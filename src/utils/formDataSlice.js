@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     countryCode: null,
-    date: null,
+    dob: null,
     phoneNumber: null,
   };
   

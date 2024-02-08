@@ -81,6 +81,10 @@
     font-size: 18px;
 }
 @media screen and (max-width: 992px) {
+    .otp{
+        width: 60%;
+        margin: auto;
+    }
     .first-para{
         font-weight: 700;
         font-size: 27px;

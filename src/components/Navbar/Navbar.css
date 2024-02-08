@@ -69,6 +69,7 @@
 }
  
 .navlink-open{
+    padding: 10px;
     display: flex;
     flex-direction: column;
     background-color: black;

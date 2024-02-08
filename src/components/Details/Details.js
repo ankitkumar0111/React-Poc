@@ -12,24 +12,24 @@ import LocalAtmOutlinedIcon from "@mui/icons-material/LocalAtmOutlined";
 import { useNavigate } from 'react-router-dom'
 import { isFieldEmpty } from "../../utils/isFieldEmpty";
 
-const useStyles = makeStyles({
-  icon: {
-    marginLeft: "-360px",
-  },
-  '@media (max-width: 1050px)': {
-   icon: {
-    marginLeft: "-300px"
-   }
-  },
-  '@media (max-width: 900px)': {
-    icon: {
-     marginLeft: "-225px"
-    }
-   },
-});
+// const useStyles = makeStyles({
+//   icon: {
+//     marginLeft: "-360px",
+//   },
+//   '@media (max-width: 1050px)': {
+//    icon: {
+//     marginLeft: "-300px"
+//    }
+//   },
+//   '@media (max-width: 900px)': {
+//     icon: {
+//      marginLeft: "-225px"
+//     }
+//    },
+// });
 
 const Details = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const [promoCode, setPromoCode] = useState();
   const [senderError, setSenderError] = useState('')
   const [receiverError, setReceiverError] = useState('')
@@ -236,7 +236,7 @@ const Details = () => {
           }}
         >
           <AccordionSummary
-            expandIcon={<ExpandMoreIcon className={classes.icon} />}
+            expandIcon={<ExpandMoreIcon  />}
             aria-controls="panel1a-content"
             id="panel1a-header"
             onClick={handleSenderClick}
@@ -317,7 +317,7 @@ const Details = () => {
           }}
         >
           <AccordionSummary
-            expandIcon={<ExpandMoreIcon className={classes.icon} />}
+            expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
             onClick={handleReceiverClick}
