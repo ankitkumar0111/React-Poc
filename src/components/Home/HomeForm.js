@@ -14,17 +14,18 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const HomeForm = () => {
   const [countryCode , setCountryCode] = useState(null)
-  const [date, setDate] = useState(null)
+  // const [date, setDate] = useState(null)
   const [phoneNumber, setPhoneNumber] = useState(null)
   const [codeError, setCodeError] = useState('')
   const [phoneError, setPhoneError] = useState('')
-  // const [dateError, setDateError] = useState('')
+  const [dob, setDob] = useState("")
+  const [dateError, setDateError] = useState('')
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const validateForm = () => {
     const codeValidation = isFieldEmpty(countryCode?.phoneCode, ['notEmpty'], 'Country Code is required');
   const phoneValidation = isFieldEmpty(phoneNumber, ['notEmpty', 'tenDigits'], 'Phone Number is required and should be 10 digits');
-  // const dateValidation = isFieldEmpty(date, ['notEmpty', 'validDate'], 'Date is required and should be a valid date');
+  const dateValidation = isFieldEmpty(dob, ['notEmpty'], 'Date is required');
 
     if(!codeValidation.isValid){
       setCodeError(codeValidation.errorMessage)
@@ -37,10 +38,10 @@ const HomeForm = () => {
       return false;
     }
   
-    // if (!dateValidation.isValid) {
-    //   setDateError(dateValidation.errorMessage);
-    //   return false;
-    // }
+    if (!dateValidation.isValid) {
+      setDateError(dateValidation.errorMessage);
+      return false;
+    }
     return true;
   }
   
@@ -57,10 +58,10 @@ const HomeForm = () => {
     
     const formData = {
       countryCode: countryCode,
-      date: date , // Format the date here
+      dob: dob , // Format the date here
       phoneNumber: phoneNumber,
     };
-    console.log("Form submitted",countryCode, date,phoneNumber);
+    console.log("Form submitted",countryCode, dob,phoneNumber);
     if(validateForm()){
       dispatch(updateFormData(formData))
       toast.success("Details are correct")
@@ -90,8 +91,8 @@ const HomeForm = () => {
          
         </div>
         <div className="lower-field">
-          <DateSelector date={date} setDate={setDate} />
-          {/* {dateError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{dateError}</span>} */}
+          <DateSelector dob={dob} setDob={setDob}/>
+          {dateError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{dateError}</span>}
           {/* <p>{message}</p> */}
         </div>
         <div className="button">

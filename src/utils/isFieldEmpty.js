@@ -34,11 +34,7 @@ export const isFieldEmpty = (value, validationTypes, errorMessage = 'This field 
         notEmpty: () => typeof value === 'string' && value.trim() !== '',
         tenDigits: () => /^\d{10}$/.test(value),
         validEmail: () => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
-        // validDate: () => {
-        //   // Add additional date validation if needed
-        //   // For simplicity, let's check if it's a valid date string
-        //   return !isNaN(new Date(value).getTime());
-        // },
+       
       };
   
     const isValid = validationTypes.every((type) => validationFunctions[type]());

@@ -14,12 +14,12 @@ function Header() {
     return (
         <div className='nav-container'>
             <div className='nav-container-inner-div'>
-                <div className='image-logo-div'>
-                    <img src="" alt='wu-logo' className='image-header' />
-                </div>
-                <div className="vl"></div>
+                {/* <div className='image-logo-div'>
+                    <img src="https://www.dollargeneral.com/content/dam/dg/assets/header-navigation/desktoplogo.png" alt='wu-logo' className='image-header' />
+                </div> */}
+                {/* <div className="vl"></div> */}
                 <div className='dollar-genenral-div'>
-                    <img src="" alt='dollar-general logo' className='dollar-general-header' />
+                    <img src="https://www.dollargeneral.com/content/dam/dg/assets/header-navigation/desktoplogo.png" alt='dollar-general logo' className='dollar-general-header' />
                 </div>
  
             </div>
@@ -28,7 +28,7 @@ function Header() {
                 <p className='find-locations-para'>Find locations</p>
             </div>
             <div className='wu-small-logo-div'>
-                <img src="" alt='logo' className='wu-small-logo' />
+                <img src="https://www.westernunion.com/content/dam/wu/logo/logo.wu.small.svg" alt='logo' className='wu-small-logo' />
             </div>
             <div className='menu-item-div' onClick={toggleNavbar}>
                 <MenuIcon className='menu-icon-header' />

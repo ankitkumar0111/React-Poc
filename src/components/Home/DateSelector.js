@@ -1,14 +1,16 @@
-import { Stack } from "@mui/material";
+
 import { DatePicker } from "@mui/x-date-pickers";
 import React from "react";
 import "./Home.css"
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-// import { endOfYear } from "date-fns";
-// import { endOfDecade } from "date-fns/esm/fp";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from "dayjs";
 
-const DateSelector = ({ date, setDate }) => {
+const DateSelector = ({ dob, setDob }) => {
+
+  const maxdate = dayjs().subtract(14, 'year');
+    const mindate = dayjs().subtract(100,'year');
 
   const handleDateChange = (date) => {
     if (date != null) {
@@ -18,16 +20,7 @@ const DateSelector = ({ date, setDate }) => {
         console.log(date.$d.getFullYear());
         const formattedDate = `${date.$d.getMonth() + 1}/${date.$d.getDate()}/${date.$d.getFullYear()}`;
         console.log(formattedDate);
-        const err = DobValidation(formattedDate);
-        if (err === "") {
-            setDob(formattedDate);
-            errors.dob = "";
-            setDobError('');
-        }
-        else {
-            setDobError(err);
-            errors.dob = "";
-        }
+        setDob(formattedDate)
     }
     else {
         setDob('');
@@ -35,27 +28,14 @@ const DateSelector = ({ date, setDate }) => {
 }
     
   return (
-    // <Stack spacing={4} sx={{ width: "100%",border:"none !important"}}>
-    //   <DatePicker
-    //   className=".date-picker"
-    //     label="Date of birth (MM/DD/YYYY)"
-    //     // renderInput={(params) => <TextField {...params} />}
-    //     value={date}
-    //     onChange={(date) => {
-    //       console.log(date)
-    //         // setDate(newValue)
-            
-    //     }}
-    //     maxDate= {new Date("2023-20-12")}
-    //   />
-    // </Stack>
+    
     <LocalizationProvider dateAdapter={AdapterDayjs} >
                                 <DemoContainer components={['DatePicker', 'DatePicker', 'DatePicker']}>
                                     <DatePicker
                                         label="Date of birth(MM/DD/YYYY)"
                                         slotProps={{ textField: { size: 'small' } }}
-                                        // maxDate={maxdate}
-                                        // minDate={mindate}
+                                        maxDate={maxdate}
+                                        minDate={mindate}
                                         onChange={(date) => { handleDateChange(date) }}
                                     />
                                 </DemoContainer>
