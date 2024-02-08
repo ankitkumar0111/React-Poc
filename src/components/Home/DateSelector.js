@@ -7,7 +7,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from "dayjs";
 
-const DateSelector = ({ dob, setDob }) => {
+const DateSelector = ({ dob, setDob, setDateError }) => {
 
   const maxdate = dayjs().subtract(14, 'year');
     const mindate = dayjs().subtract(100,'year');
@@ -21,6 +21,7 @@ const DateSelector = ({ dob, setDob }) => {
         const formattedDate = `${date.$d.getMonth() + 1}/${date.$d.getDate()}/${date.$d.getFullYear()}`;
         console.log(formattedDate);
         setDob(formattedDate)
+        setDateError('')
     }
     else {
         setDob('');

@@ -161,8 +161,6 @@ const options = data.map((country) => ({
         IndicatorSeparator }}
         styles={customStyles}
         filterOption={filterOptions}
-        
-        // required
       />
     </div>
   );

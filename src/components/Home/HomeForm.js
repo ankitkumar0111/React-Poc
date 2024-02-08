@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateFormData } from "../../utils/formDataSlice";
 import { isFieldEmpty } from "../../utils/isFieldEmpty";
-import { format } from "date-fns";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -22,52 +21,44 @@ const HomeForm = () => {
   const [dateError, setDateError] = useState('')
   const navigate = useNavigate()
   const dispatch = useDispatch();
-  const validateForm = () => {
-    const codeValidation = isFieldEmpty(countryCode?.phoneCode, ['notEmpty'], 'Country Code is required');
-  const phoneValidation = isFieldEmpty(phoneNumber, ['notEmpty', 'tenDigits'], 'Phone Number is required and should be 10 digits');
-  const dateValidation = isFieldEmpty(dob, ['notEmpty'], 'Date is required');
-
-    if(!codeValidation.isValid){
-      setCodeError(codeValidation.errorMessage)
-      // console.log("kshfvjfs",coderError);
-      return false;
-    }
-    // console.log("abcd",coderError);
-    if (!phoneValidation.isValid) {
-      setPhoneError(phoneValidation.errorMessage);
-      return false;
-    }
-  
-    if (!dateValidation.isValid) {
-      setDateError(dateValidation.errorMessage);
-      return false;
-    }
-    return true;
-  }
   
 
   const handleChange = (e) => {
-    const { value} = e.target
-    setPhoneNumber(value)
-
-    setPhoneError('')
-    console.log(phoneNumber);
-  }
-  const handleSubmit = async(e) => {
-    e.preventDefault()
+    const { value } = e.target;
+    setPhoneNumber(value);
+    setPhoneError('');
     
+    // Dynamically update phone number error message based on input length
+    if (value.trim().length !== 10) {
+      setPhoneError('Phone Number should be of 10 digits');
+    }else {
+      setPhoneError('')
+    } 
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const codeValidation = isFieldEmpty(countryCode?.phoneCode, ['notEmpty'], 'Country Code is required');
+    const phoneValidation = isFieldEmpty(phoneNumber, ['notEmpty', 'tenDigits'], 'Phone Number is required and should be 10 digits');
+    const dateValidation = isFieldEmpty(dob, ['notEmpty'], 'Date is required');
+
+    setCodeError(codeValidation.errorMessage);
+    setPhoneError(phoneValidation.errorMessage);
+    setDateError(dateValidation.errorMessage);
+
+    if (!codeValidation.isValid || !phoneValidation.isValid || !dateValidation.isValid) {
+      return;
+    }
+
+    // Dispatch form data and navigate
     const formData = {
       countryCode: countryCode,
-      dob: dob , // Format the date here
+      dob: dob,
       phoneNumber: phoneNumber,
     };
-    console.log("Form submitted",countryCode, dob,phoneNumber);
-    if(validateForm()){
-      dispatch(updateFormData(formData))
-      toast.success("Details are correct")
-      navigate("/home/otp")
-    }
-    
+    dispatch(updateFormData(formData));
+    toast.success("Details are correct");
+    navigate("/home/otp");
   }
 
   return (
@@ -77,21 +68,21 @@ const HomeForm = () => {
         <div className="upper-fields">
           <div className="code-search">
             <div className="code-search-input">
-              <Search countryCode={countryCode} setCountryCode={setCountryCode} setCodeError={setCodeError}/> 
+              <Search countryCode={countryCode} setCountryCode={setCountryCode} setCodeError={setCodeError} /> 
               <SearchIcon className="search-icon" />
             </div>
             {codeError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{codeError}</span>}
         
           </div>
           <div className="phone-number">
-            <input type="number" placeholder="Phone Number" value={phoneNumber} onChange={handleChange} />
+            <input type="number" placeholder="Phone Number" value={phoneNumber} onChange={handleChange}  />
         {phoneError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px", width:"50%" }}>{phoneError}</span>}
 
           </div>
          
         </div>
         <div className="lower-field">
-          <DateSelector dob={dob} setDob={setDob}/>
+          <DateSelector dob={dob} setDob={setDob} setDateError={setDateError}/>
           {dateError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{dateError}</span>}
           {/* <p>{message}</p> */}
         </div>
