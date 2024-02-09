@@ -343,4 +343,31 @@
     }
 }
 
+@media screen and (max-width:700px){
+    .receiver-heading{
+        font-size: 22px;
+        font-weight: 600;
+    }
+    .receiver-paragraph{
+        height: 120px;
+    }
+
+    .receiver-paragraph>p{
+        font-size: 14px;
+    }
+
+    .button-receiver>button{
+        cursor: pointer;
+        background-color: #FFF200;
+        border: 1px solid #FFF200;
+        border-radius: 30px;
+        color: black;
+        width: 75%;
+        padding: 7px;
+        font-weight: 600;
+        font-size: 13px;
+    }
+
+}
+
 

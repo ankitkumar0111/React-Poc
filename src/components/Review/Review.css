@@ -1,0 +1,39 @@
+.review-container{
+    width: 50%;
+    margin: auto;
+}
+
+.review-heading{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 36px;
+}
+
+.review-heading>p{
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.print-icon{
+    margin-top: 47px;
+}
+
+.review-para{
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0px;
+}
+
+.review-details{
+    background-color: white;
+    border: 1px solid white;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.review-details>p{
+    margin: 43px;
+    margin-left: 40px;
+    font-size: 22px;
+    font-weight: 500;
+}

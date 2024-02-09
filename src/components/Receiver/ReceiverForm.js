@@ -7,7 +7,7 @@ import { isFieldEmpty } from "../../utils/isFieldEmpty";
 
 const ReceiverForm = () => {
     
-  const [input, setInput] = useState("+1");
+  const [input, setInput] = useState("");
   const [results, setResults] = useState();
   const [data, setData] = useState();
   const [states, setStates] = useState();
@@ -60,6 +60,7 @@ const ReceiverForm = () => {
     // setSelectedResult(result);
     setInput("+" + result.phone_code);
     fetchState(result.iso2);
+    setCodeError('')
   };
 
   const handleChangeState = (e) => {
@@ -104,6 +105,11 @@ const ReceiverForm = () => {
     const { value } = e.target;
     setMobileNumber(value);
     setMobileError('')
+    if (value.trim().length !== 10) {
+      setMobileError('Phone Number should be of 10 digits');
+    }else {
+      setMobileError('')
+    } 
   }
 
   // const handleCodeChange = (e) => {
@@ -118,68 +124,39 @@ const ReceiverForm = () => {
   //   setStateError('')
   // }
 
-  const validateForm = () => {
-    const firstNameValidation = isFieldEmpty(firstName, ['notEmpty'], 'First Name is required');
-    const lastNameValidation = isFieldEmpty(lastName, ['notEmpty'], 'Last Name is required');
-    const emailValidation = isFieldEmpty(email,['notEmpty','validEmail'],'Invalid Email Address')
-    const codeValidation = isFieldEmpty(input,['notEmpty'],'Country Code is required')
-    const stateValidation = isFieldEmpty(data,['notEmpty'],'State is required')
-  const mobileValidation = isFieldEmpty(mobileNumber, ['notEmpty', 'tenDigits'], 'Mobile Number is required and should be 10 digits');
 
-  // const dateValidation = isFieldEmpty(date, ['notEmpty', 'validDate'], 'Date is required and should be a valid date');
 
-    if(!firstNameValidation.isValid){
-      setFirstError(firstNameValidation.errorMessage)
-      // console.log("kshfvjfs",coderError);
-      return false;
-    }
-    if(!lastNameValidation.isValid){
-      setLastError(lastNameValidation.errorMessage)
-      // console.log("kshfvjfs",coderError);
-      return false;
-    }
-    if(!emailValidation.isValid){
-      setEmailError(emailValidation.errorMessage)
-      // console.log("kshfvjfs",coderError);
-      return false;
-    }
-    // console.log("abcd",coderError);
-    if (!mobileValidation.isValid) {
-      setMobileError(mobileValidation.errorMessage);
-      return false;
-    }
-    if(!codeValidation.isValid){
-      setCodeError(codeValidation.errorMessage)
-      // console.log("kshfvjfs",coderError);
-      return false;
-    }
-    if(!stateValidation.isValid){
-      setStateError(stateValidation.errorMessage)
-      // console.log("kshfvjfs",coderError);
-      return false;
-    }
-
-    // if (!dateValidation.isValid) {
-    //   setDateError(dateValidation.errorMessage);
-    //   return false;
-    // }
-    return true;
-  }
+  
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    if(validateForm()){
-      navigate("/home/addpersonal")
-    }
+    const firstNameValidation = isFieldEmpty(firstName, ['notEmpty'], 'First Name is required');
+    const lastNameValidation = isFieldEmpty(lastName, ['notEmpty'], 'Last Name is required');
+    // const emailValidation = isFieldEmpty(email,['notEmpty','validEmail'],'Invalid Email Address')
+    const codeValidation = isFieldEmpty(input,['notEmpty'],'Country Code is required')
+    const stateValidation = isFieldEmpty(data,['notEmpty'],'State is required')
+  const mobileValidation = isFieldEmpty(mobileNumber, ['notEmpty', 'tenDigits'], 'Mobile Number is required');
+
+  setFirstError(firstNameValidation.errorMessage);
+  setLastError(lastNameValidation.errorMessage);
+  // setEmailError(emailValidation.errorMessage);
+  setCodeError(codeValidation.errorMessage);
+  setStateError(stateValidation.errorMessage);
+  setMobileError(mobileValidation.errorMessage);
+
+  if(!firstNameValidation.isValid || !lastNameValidation.isValid  || !codeValidation.isValid || !stateValidation.isValid || !mobileValidation.isValid){
+    return;
+  }
+  navigate("/home/addpersonal")
   }
 
   return (
     <div className="receiver-form">
       <form onSubmit={handleSubmit}>
         <div className="first-name">
-          <input type="text" placeholder="First name" value={firstName} onChange={handleFirstChange}/>
+          <input type="text" placeholder="First name" value={firstName} onChange={handleFirstChange}  onBlur={() => setFirstError('First Name is required')}/>
           {firstError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{firstError}</span>}
-          <input type="text" placeholder="Last name" value={lastName} onChange={handleLastChange}/>
+          <input type="text" placeholder="Last name" value={lastName} onChange={handleLastChange} onBlur={() => setLastError('Last Name is required')}/>
           {lastError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{lastError}</span>}
         </div>
         <div className="middle-name">
@@ -191,7 +168,7 @@ const ReceiverForm = () => {
           <input type="text" placeholder="Middle Name" />
         </div>}
         <div className="email">
-          <input type="text" placeholder="Enter email (optional)" value={email} onChange={handleEmailChange}/>
+          <input type="text" placeholder="Enter email (optional)" value={email} onChange={handleEmailChange}  onBlur={() => setEmailError(isFieldEmpty(email, ['validEmail'],'Invalid Email Address').errorMessage)}/>
           {emailError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{emailError}</span>}
         </div>
         <div className="country-mobile">
@@ -206,7 +183,7 @@ const ReceiverForm = () => {
               />
               <SearchIcon className="search-icon" />
             </div>
-            {codeError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{codeError}</span>}
+            
 
             <div className="result">
               <div className="result2">
@@ -226,6 +203,7 @@ const ReceiverForm = () => {
                   })}
               </div>
             </div>
+            {codeError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{codeError}</span>}
           </div>
           <div className="mobile-number">
           <input
@@ -243,7 +221,7 @@ const ReceiverForm = () => {
           <div className="state-result">
             <div className="state-search">
               <input type="text" placeholder="State" onChange={handleChangeState} value={data}/>
-              {stateError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{stateError}</span>}
+             
               <SearchIcon className="search-icon"/>
             </div>
             <div className="result">
@@ -265,6 +243,8 @@ const ReceiverForm = () => {
               </div>
             </div>
           </div>
+          {stateError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{stateError}</span>}
+
         </div>
         <div className="button-receiver">
           <button type="submit">Add Receiver</button>
