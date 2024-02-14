@@ -1,0 +1,116 @@
+/* *{
+    margin: 0px;
+} */
+.main-div-style{
+    background-color: #EBECE7;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+/* .yellow-background{
+    background-color: yellow;
+    width: 80%;
+
+} */
+
+.transfer-container{
+    width: 50%;
+    margin: auto;
+}
+.transfer-container-para{
+    margin-top: 37px;
+    margin-bottom: 20px;
+}
+
+.transfer-container-para>h1{
+   margin: 0px;
+}
+
+.transfer-container-1{
+    background-color: white;
+    padding: 25px 40px;
+}
+
+.transfer-container-1>p{
+    margin: 0px;
+    font-size: 17px;
+    font-weight: 600;
+    /* margin-top: 20px; */
+}
+
+.transfer-time{
+    display: flex;
+    margin-top: 15px;
+}
+
+.transfer-time-1{
+    margin-left: 10px;
+}
+
+.transfer-time-1>p{
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.transfer-total{
+    display: flex;
+    margin: 35px 0px;
+}
+
+.transfer-total>p{
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+.transfer-time-2{
+    margin-left: 15px;
+}
+
+.transfer-time-2>p{
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.transfer-details{
+    background-color: white;
+    margin-top: 30px;
+    padding-bottom: 40px;
+}
+
+.transfer-details-1{
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 40px;
+}
+
+.transfer-details-1>p{
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.review-para-1{
+    margin-top: 30px;
+}
+
+.review-para-1>div{
+    margin-top: 20px;
+}
+
+.review-para-1>div>p{
+    margin: 0px;
+    /* margin-top: 20px; */
+    font-size: 15px;
+    font-weight: 600;
+    color: grey; 
+}
+
+.review-para-1>p{
+    margin: 0px;
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: grey;
+}

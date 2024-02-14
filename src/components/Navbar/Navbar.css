@@ -2,6 +2,7 @@
     display: flex;
     width: 100%;
     background-color: black;
+    height: 70px;
 }
  
 .nav-container-inner-div{
@@ -40,6 +41,7 @@
     width: 150px;
     font-weight: 500;
     font-size: large;
+    margin: 23px;
 }
  
  

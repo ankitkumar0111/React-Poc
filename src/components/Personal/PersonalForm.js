@@ -43,7 +43,7 @@ const PersonalForm = () => {
           />
         </div> */}
         <div className='dob'>
-        <input type="text" placeholder="Date of birth(MM/DD/YYYY)" value={formData?.date || ''} required />
+        <input type="text" placeholder="Date of birth(MM/DD/YYYY)" value={formData?.dob || ''} required />
         </div>
 
         <div className='country-phone'>

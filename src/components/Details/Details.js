@@ -156,42 +156,44 @@ const Details = () => {
     setReceiverCountryImage(iso2.toLowerCase());
     setReceiverMoneyInput(null);
   };
-  // const fetchReceiverCurrencyRate = async (formattedFloat) => {
-  //   const data = await fetch(
-  //     `https://v6.exchangerate-api.com/v6/c541c99ac7613023ca34b8c9/pair/${receiverCurrency}/${senderCurrency}/${formattedFloat}`
-  //   );
-  //   const json = await data.json();
-  //   console.log(json);
+  const fetchReceiverCurrencyRate = async (formattedFloat) => {
+    const data = await fetch(
+      `https://v6.exchangerate-api.com/v6/c541c99ac7613023ca34b8c9/pair/${receiverCurrency}/${senderCurrency}/${formattedFloat}`
+    );
+    const json = await data.json();
+    console.log(json);
 
-  //   setSenderMoneyInput(json.conversion_result);
-  // };
+    setSenderMoneyInput(json.conversion_result);
+  };
   const handleReceiverMoneyInput = (e) => {
     const { value } = e.target;
     setReceiverMoneyInput(value);
     setSenderError('')
     setReceiverError('')
-   
+    let floatValue = parseFloat(receiverMoneyInput);
+      let formattedFloat = floatValue.toFixed(4);
+      fetchReceiverCurrencyRate(formattedFloat)
     
   };
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    // console.log(formattedFloat);
-    // console.log(senderMoneyInput);
-    // if (receiverMoneyInput) {
-    //   let floatValue = parseFloat(receiverMoneyInput);
-    //   let formattedFloat = floatValue.toFixed(4);
-    //   fetchReceiverCurrencyRate(formattedFloat)
-    // }else{
-    //   setSenderMoneyInput()
-    // }
-    if(receiverMoneyInput === ''){
-      setSenderMoneyInput('')
-    }
-    console.log(receiverMoneyInput);
-    console.log(senderMoneyInput);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[receiverMoneyInput])
+  //   // console.log(formattedFloat);
+  //   // console.log(senderMoneyInput);
+  //   // if (receiverMoneyInput) {
+  //   //   let floatValue = parseFloat(receiverMoneyInput);
+  //   //   let formattedFloat = floatValue.toFixed(4);
+  //   //   fetchReceiverCurrencyRate(formattedFloat)
+  //   // }else{
+  //   //   setSenderMoneyInput()
+  //   // }
+  //   if(receiverMoneyInput === ''){
+  //     setSenderMoneyInput('')
+  //   }
+  //   console.log(receiverMoneyInput);
+  //   console.log(senderMoneyInput);
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // },[receiverMoneyInput])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -202,7 +204,6 @@ const Details = () => {
     //   setReceiverError('')
     // }
     // if(validateForm()){
-      alert("Form submitted successfully")
       navigate("/home/addreceiver")
     // }
     console.log("abcd");
@@ -284,8 +285,7 @@ const Details = () => {
                           country.iso2
                         )
                       }
-                      checked={selectedSenderCountry === country.name}
-                      required
+  
                     />
                     
                     <img
@@ -364,7 +364,6 @@ const Details = () => {
                         )
                       }
                       checked={selectedReceiverCountry === country.name}
-                      required
                     />
                     <img
                       src={`https://flagcdn.com/w40/${country.iso2.toLowerCase()}.png`}

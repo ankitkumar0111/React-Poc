@@ -59,7 +59,7 @@ const useStyles = makeStyles({
   // tickVisible: {
   //   visibility: 'visible',
   // },
-  '@media (max-width: 800px)': {
+  '@media (max-width: 850px)': {
     root: {
       width: '80%',
       marginLeft: 10,

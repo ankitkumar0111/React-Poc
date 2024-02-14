@@ -11,7 +11,6 @@ const OtpPage = () => {
   const handleSubmit = () => {
     const enteredOtp = otp.join('');
     if(enteredOtp === "234432"){
-     toast.success("OTP verifed successfully")
       navigate("/home/moneydetails")
     }
     else{

@@ -57,7 +57,7 @@ const HomeForm = () => {
       phoneNumber: phoneNumber,
     };
     dispatch(updateFormData(formData));
-    toast.success("Details are correct");
+    
     navigate("/home/otp");
   }
 

@@ -9,6 +9,7 @@ import { Provider } from "react-redux"
 import appStore from './utils/appStore';
 import Details from './components/Details/Details';
 import Review from './components/Review/Review';
+import TransferDetails from './components/Transfer Details/TransferDetails';
 
 
 
@@ -57,6 +58,10 @@ const appRouter = createBrowserRouter([
         path:'/home/review',
         element: <Review/>
       },
+      {
+        path:'/home/transferdetails',
+        element: <TransferDetails/>
+      }
     ]
   },
 ])
