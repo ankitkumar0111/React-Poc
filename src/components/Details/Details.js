@@ -105,22 +105,23 @@ const Details = () => {
     setSenderMoneyInput(value);
     setSenderError('')
     setReceiverError('')
+    let floatValue = parseFloat(senderMoneyInput);
+    let formattedFloat = floatValue.toFixed(4);
+    fetchSenderCurrencyRate(formattedFloat);
    console.log(receiverError);
     
     console.log(senderMoneyInput);
     console.log(receiverMoneyInput);
   };
 
-  useEffect(() => {
-    if(senderMoneyInput){
-      let floatValue = parseFloat(senderMoneyInput);
-    let formattedFloat = floatValue.toFixed(4);
-    fetchSenderCurrencyRate(formattedFloat);
-    }else{
-      setReceiverMoneyInput()
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[senderMoneyInput])
+  // useEffect(() => {
+  //   if(senderMoneyInput){
+      
+  //   }else{
+  //     setReceiverMoneyInput()
+  //   }
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // },[senderMoneyInput])
 
   //Receiver functions
   const fetchReceiverCode = async (value) => {

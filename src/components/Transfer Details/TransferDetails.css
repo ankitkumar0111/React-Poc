@@ -48,9 +48,14 @@
 }
 
 .transfer-time-1>p{
+    margin: 0px;
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 5px;
+}
+
+.transfer-time-1>h3{
+    margin: 0px;
 }
 
 .transfer-total{
@@ -59,6 +64,7 @@
 }
 
 .transfer-total>p{
+    margin: 0px;
     font-size: 16px;
     font-weight: 600;
     margin-left: 8px;
@@ -69,9 +75,14 @@
 }
 
 .transfer-time-2>p{
+    margin: 0px;
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 5px;
+}
+
+.transfer-time-2>h3{
+    margin: 0px;
 }
 
 .transfer-details{
@@ -113,4 +124,21 @@
     font-size: 15px;
     font-weight: 600;
     color: grey;
+}
+@media screen and (max-width:700px){
+    .transfer-container-1{
+        background-color: white;
+        padding: 15px 25px;
+    }
+    .transfer-container{
+        width: 70%;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width:500px){
+    .transfer-container{
+        width: 90%;
+        margin: auto;
+    }
 }

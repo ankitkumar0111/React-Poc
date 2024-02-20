@@ -154,9 +154,9 @@ const ReceiverForm = () => {
     <div className="receiver-form">
       <form onSubmit={handleSubmit}>
         <div className="first-name">
-          <input type="text" placeholder="First name" value={firstName} onChange={handleFirstChange}  onBlur={() => setFirstError('First Name is required')}/>
+          <input type="text" placeholder="First name" value={firstName} onChange={handleFirstChange} onBlur={() => setFirstError(isFieldEmpty(firstName,['notEmpty'],"First Name is required").errorMessage)}/>
           {firstError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{firstError}</span>}
-          <input type="text" placeholder="Last name" value={lastName} onChange={handleLastChange} onBlur={() => setLastError('Last Name is required')}/>
+          <input type="text" placeholder="Last name" value={lastName} onChange={handleLastChange} onBlur={() => setLastError(isFieldEmpty(lastName,['notEmpty'],"Last Name is required").errorMessage)}/>
           {lastError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{lastError}</span>}
         </div>
         <div className="middle-name">

@@ -2,11 +2,20 @@ import React, { useState } from "react";
 import "./Review.css";
 import PrintIcon from "@mui/icons-material/Print";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
 const Review = () => {
     const [hide, setHide] = useState(true)
+    const [openSender, setOpenSender] = useState(false)
+    const [openReceiver, setOpenReceiver] = useState(false)
     const handleButtonClick = () => {
         setHide(!hide)
+    }
+    const handleOpenSender = () => {
+      setOpenSender(!openSender)
+    }
+    const handleOpenReceiver = () => {
+      setOpenReceiver(!openReceiver)
     }
   return (
     <div
@@ -75,6 +84,7 @@ const Review = () => {
           </div>
         </div>
         <div className="review-sender">
+        <div className="review-sender1">
           <div className="review-sender-div">
             <img
               src="https://flagcdn.com/w40/us.png"
@@ -94,10 +104,31 @@ const Review = () => {
             </div>
           </div>
           <div>
-          <ArrowDropDownCircleOutlinedIcon style={{height:'40px', width:'50px'}}/>
+          {openSender ? <ArrowDropUpIcon onClick={handleOpenSender} style={{height:'40px', width:'50px'}}/> :  <ArrowDropDownCircleOutlinedIcon style={{height:'40px', width:'50px'}} onClick={handleOpenSender}/>}
           </div>
+          </div>
+          {
+            openSender && 
+            <div>
+            <hr style={{ margin: "25px 0px" }}></hr>
+            <div className="review-transfer-details">
+              <p>Sender's name</p>
+              <h5>Ekta Goyal</h5>
+            </div>
+
+            <div className="review-transfer-details">
+              <p>Address</p>
+              <h5>United States</h5>
+            </div>
+            <div className="review-transfer-details">
+              <p>Phone</p>
+              <h5>+916200243726</h5>
+            </div>
+            </div>
+          }
         </div>
         <div className="review-sender">
+        <div className="review-sender1">
           <div className="review-sender-div">
             <img
               src="https://flagcdn.com/w40/us.png"
@@ -116,9 +147,31 @@ const Review = () => {
               <h5>Ekta Goyal</h5>
             </div>
           </div>
+          
+          
           <div>
-            <ArrowDropDownCircleOutlinedIcon style={{height:'40px', width:'50px'}}/>
+          {openReceiver ? <ArrowDropUpIcon onClick={handleOpenReceiver} style={{height:'40px', width:'50px'}}/> :  <ArrowDropDownCircleOutlinedIcon style={{height:'40px', width:'50px'}} onClick={handleOpenReceiver}/>}
           </div>
+          </div>
+          {
+            openReceiver && 
+            <div>
+            <hr style={{ margin: "25px 0px" }}></hr>
+            <div className="review-transfer-details">
+              <p>Sender's name</p>
+              <h5>Ekta Goyal</h5>
+            </div>
+
+            <div className="review-transfer-details">
+              <p>Address</p>
+              <h5>United States</h5>
+            </div>
+            <div className="review-transfer-details">
+              <p>Phone</p>
+              <h5>+916200243726</h5>
+            </div>
+            </div>
+          }
         </div>
         <div className="review-para-1">
           <p>

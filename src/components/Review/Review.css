@@ -10,6 +10,7 @@
 }
 
 .review-heading>p{
+    margin: 0px;
     font-size: 35px;
     font-weight: 600;
 }
@@ -95,9 +96,13 @@
     border: 1px solid white;
     margin-top: 30px;
     border-radius: 5px;
+   
+    padding: 35px 40px;
+}
+
+.review-sender1{
     display: flex;
     justify-content: space-between;
-    padding: 35px 40px;
 }
 
 .review-sender-div{
@@ -203,6 +208,7 @@
 }
 
 .legal-terms-button>p{
+    margin: 0px;
     color:#255E80;
     font-weight: 500;
     margin-left: 8px;
@@ -242,3 +248,88 @@
     font-weight: 600;
     color: grey;
 }
+
+@media screen and (max-width:900px){
+    .review-details>p{
+        margin: 30px;
+        margin-left: 30px;
+        font-size: 20px;
+    }  
+    .print-icon{
+        margin-top: 10px;
+    }
+    .review-heading>p{
+        font-size: 30px;
+    }
+.review-para{
+    font-size: 14px;
+    margin-top: 20px;
+}
+    .review-transfer-details>p{
+        margin-left: 20px;
+        font-size: 14px;
+    }
+
+    .review-transfer-details>h5{
+        margin-right: 20px;
+        font-size: 14px;
+    }
+    .review-total{
+        padding: 5px 20px;
+    }
+    
+    .review-total>p{
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width:700px){
+    .review-details>p{
+        margin: 20px;
+        margin-left: 20px;
+        font-size: 19px;
+    }  
+    .review-heading>p{
+        font-size: 25px;
+    }
+    .print-icon{
+        margin-top: 7px;
+    }
+    .review-para-buttons>button{
+        padding: 7px;
+        font-size: 13px;
+    }
+    .review-transfer-details>p{
+        margin-left: 5px;
+        font-size: 14px;
+    }
+
+    .review-transfer-details>h5{
+        margin-right: 5px;
+        font-size: 14px;
+    }
+    .review-total{
+        padding: 3px 5px;
+    }
+    .review-sender{
+        padding: 15px 20px;
+    }
+    .review-sender-div2>p{
+        margin: 0px;
+        font-size: 14px;
+    }
+    
+    .review-sender-div2>h5{
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width:500px){
+    .review-container{
+        width: 98%;
+        margin: auto;
+    }
+}
+
+
+
