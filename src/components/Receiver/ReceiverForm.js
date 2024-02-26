@@ -3,27 +3,30 @@ import "./ReceiverDetails.css";
 import { useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import { isFieldEmpty } from "../../utils/isFieldEmpty";
-
+import { useDispatch } from "react-redux";
+import { updateReceiverData } from "../../utils/receiverSlice";
 
 const ReceiverForm = () => {
-    
   const [input, setInput] = useState("");
   const [results, setResults] = useState();
   const [data, setData] = useState();
   const [states, setStates] = useState();
-  const [filteredStates, setFilteredStates] = useState()
-  const[firstName, setFirstName] = useState()
-  const [lastName, setLastName] = useState()
-  const[email, setEmail] = useState()
-  const[mobileNumber, setMobileNumber] = useState()
-  const [middleName, setMiddleName] = useState(false)
-  const [firstError, setFirstError] = useState('')
-  const[lastError, setLastError] = useState('')
-  const[emailError, setEmailError] = useState('')
-  const[mobileError, setMobileError] = useState('')
-  const[codeError, setCodeError] = useState('')
-  const[stateError, setStateError] = useState('')
-  const navigate = useNavigate()
+  const [filteredStates, setFilteredStates] = useState();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [middle, setMiddle] = useState();
+  const [email, setEmail] = useState();
+  const [mobileNumber, setMobileNumber] = useState();
+  const [middleName, setMiddleName] = useState(false);
+  const [firstError, setFirstError] = useState("");
+  const [lastError, setLastError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [mobileError, setMobileError] = useState("");
+  const [codeError, setCodeError] = useState("");
+  const [stateError, setStateError] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const fetchCode = async (value) => {
     const data = await fetch("http://localhost:3000/country");
     const json = await data.json();
@@ -36,7 +39,7 @@ const ReceiverForm = () => {
       );
     });
     setResults(filteredData);
-    // console.log(results);
+    console.log(results);
   };
 
   const fetchState = async (countryCode) => {
@@ -52,15 +55,16 @@ const ReceiverForm = () => {
     const { value } = e.target;
     setInput(value);
     fetchCode(value);
-    setCodeError('')
+    setCodeError("");
   };
 
   const handleClickCode = (result) => {
     setResults(null);
     // setSelectedResult(result);
+    console.log(result);
     setInput("+" + result.phone_code);
     fetchState(result.iso2);
-    setCodeError('')
+    setCodeError("");
   };
 
   const handleChangeState = (e) => {
@@ -70,47 +74,52 @@ const ReceiverForm = () => {
     const filteredData = states.filter((state) =>
       state.name.toLowerCase().includes(value.toLowerCase())
     );
-    setFilteredStates(filteredData)
-    setStateError('')
+    setFilteredStates(filteredData);
+    setStateError("");
   };
 
   const handleClickState = (state) => {
-    setFilteredStates(null)
-    setData(state.name)
-  }
+    setFilteredStates(null);
+    setData(state.name);
+  };
 
   const handleCheckbox = () => {
-    setMiddleName(!middleName)
-  }
+    setMiddleName(!middleName);
+  };
 
   const handleFirstChange = (e) => {
     const { value } = e.target;
     setFirstName(value);
-    setFirstError('')
-  }
+    setFirstError("");
+  };
 
   const handleLastChange = (e) => {
     const { value } = e.target;
     setLastName(value);
-    setLastError('')
-  }
-  
+    setLastError("");
+  };
+
+  const handleMiddleChange = (e) => {
+    const { value } = e.target;
+    setMiddle(value);
+  };
+
   const handleEmailChange = (e) => {
     const { value } = e.target;
     setEmail(value);
-    setEmailError('')
-  }
+    setEmailError("");
+  };
 
   const handleMobileChange = (e) => {
     const { value } = e.target;
     setMobileNumber(value);
-    setMobileError('')
+    setMobileError("");
     if (value.trim().length !== 10) {
-      setMobileError('Phone Number should be of 10 digits');
-    }else {
-      setMobileError('')
-    } 
-  }
+      setMobileError("Phone Number should be of 10 digits");
+    } else {
+      setMobileError("");
+    }
+  };
 
   // const handleCodeChange = (e) => {
   //   const { value } = e.target;
@@ -124,52 +133,124 @@ const ReceiverForm = () => {
   //   setStateError('')
   // }
 
-
-
-  
-
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const firstNameValidation = isFieldEmpty(firstName, ['notEmpty'], 'First Name is required');
-    const lastNameValidation = isFieldEmpty(lastName, ['notEmpty'], 'Last Name is required');
-    // const emailValidation = isFieldEmpty(email,['notEmpty','validEmail'],'Invalid Email Address')
-    const codeValidation = isFieldEmpty(input,['notEmpty'],'Country Code is required')
-    const stateValidation = isFieldEmpty(data,['notEmpty'],'State is required')
-  const mobileValidation = isFieldEmpty(mobileNumber, ['notEmpty', 'tenDigits'], 'Mobile Number is required');
+    const firstNameValidation = isFieldEmpty(
+      firstName,
+      ["notEmpty"],
+      "First Name is required"
+    );
+    const lastNameValidation = isFieldEmpty(
+      lastName,
+      ["notEmpty"],
+      "Last Name is required"
+    );
+    const emailValidation = isFieldEmpty(email,['validEmail'],'Invalid Email Address')
+    const codeValidation = isFieldEmpty(
+      input,
+      ["notEmpty"],
+      "Country Code is required"
+    );
+    const stateValidation = isFieldEmpty(
+      data,
+      ["notEmpty"],
+      "State is required"
+    );
+    const mobileValidation = isFieldEmpty(
+      mobileNumber,
+      ["notEmpty", "tenDigits"],
+      "Mobile Number is required"
+    );
 
-  setFirstError(firstNameValidation.errorMessage);
-  setLastError(lastNameValidation.errorMessage);
-  // setEmailError(emailValidation.errorMessage);
-  setCodeError(codeValidation.errorMessage);
-  setStateError(stateValidation.errorMessage);
-  setMobileError(mobileValidation.errorMessage);
+    setFirstError(firstNameValidation.errorMessage);
+    setLastError(lastNameValidation.errorMessage);
+    setEmailError(emailValidation.errorMessage);
+    setCodeError(codeValidation.errorMessage);
+    setStateError(stateValidation.errorMessage);
+    setMobileError(mobileValidation.errorMessage);
 
-  if(!firstNameValidation.isValid || !lastNameValidation.isValid  || !codeValidation.isValid || !stateValidation.isValid || !mobileValidation.isValid){
-    return;
-  }
-  navigate("/home/addpersonal")
-  }
+    if (
+      !firstNameValidation.isValid ||
+      !lastNameValidation.isValid ||
+      !emailValidation.isValid ||
+      !codeValidation.isValid ||
+      !stateValidation.isValid ||
+      !mobileValidation.isValid
+    ) {
+      return;
+    }
+    const receiverData = {
+      firstName: firstName,
+      lastName: lastName,
+      middle: middle,
+      mobileNumber: mobileNumber,
+    };
+    dispatch(updateReceiverData(receiverData));
+    navigate("/home/addpersonal");
+  };
 
   return (
     <div className="receiver-form">
       <form onSubmit={handleSubmit}>
         <div className="first-name">
-          <input type="text" placeholder="First name" value={firstName} onChange={handleFirstChange} onBlur={() => setFirstError(isFieldEmpty(firstName,['notEmpty'],"First Name is required").errorMessage)}/>
-          {firstError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{firstError}</span>}
-          <input type="text" placeholder="Last name" value={lastName} onChange={handleLastChange} onBlur={() => setLastError(isFieldEmpty(lastName,['notEmpty'],"Last Name is required").errorMessage)}/>
-          {lastError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{lastError}</span>}
+          <input
+            type="text"
+            placeholder="First name"
+            value={firstName}
+            onChange={handleFirstChange}
+            onBlur={() =>
+              setFirstError(
+                isFieldEmpty(firstName, ["notEmpty"], "First Name is required")
+                  .errorMessage
+              )
+            }
+          />
+          {firstError && (
+            <span style={{ color: "red", fontWeight: "600", fontSize: "15px" }}>
+              {firstError}
+            </span>
+          )}
+          <input
+            type="text"
+            placeholder="Last name"
+            value={lastName}
+            onChange={handleLastChange}
+            onBlur={() =>
+              setLastError(
+                isFieldEmpty(lastName, ["notEmpty"], "Last Name is required")
+                  .errorMessage
+              )
+            }
+          />
+          {lastError && (
+            <span style={{ color: "red", fontWeight: "600", fontSize: "15px" }}>
+              {lastError}
+            </span>
+          )}
         </div>
         <div className="middle-name">
           <label>
-            <input type="checkbox" onChange={handleCheckbox}/>I have middle/second last name.
+            <input type="checkbox" onChange={handleCheckbox} />I have
+            middle/second last name.
           </label>
         </div>
-        {middleName &&  <div className="middleName">
-          <input type="text" placeholder="Middle Name" />
-        </div>}
+        {middleName && (
+          <div className="middleName">
+            <input type="text" placeholder="Middle Name" value={middle} onChange={handleMiddleChange}/>
+          </div>
+        )}
         <div className="email">
-          <input type="text" placeholder="Enter email (optional)" value={email} onChange={handleEmailChange}  onBlur={() => setEmailError(isFieldEmpty(email, ['validEmail'],'Invalid Email Address').errorMessage)}/>
-          {emailError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{emailError}</span>}
+          <input
+            type="text"
+            placeholder="Enter email (optional)"
+            value={email}
+            onChange={handleEmailChange}
+          />
+          {emailError && (
+            <span style={{ color: "red", fontWeight: "600", fontSize: "15px" }}>
+              {emailError}
+            </span>
+          )}
         </div>
         <div className="country-mobile">
           <div className="code-result">
@@ -180,10 +261,15 @@ const ReceiverForm = () => {
                 placeholder="Country Code"
                 value={input}
                 onChange={handleChangeCode}
+                onBlur={() =>
+                  setCodeError(
+                    isFieldEmpty(input, ["notEmpty"], "Country Code is required")
+                      .errorMessage
+                  )
+                }
               />
               <SearchIcon className="search-icon" />
             </div>
-            
 
             <div className="result">
               <div className="result2">
@@ -195,23 +281,40 @@ const ReceiverForm = () => {
                         className="result-list"
                         onClick={() => handleClickCode(result)}
                       >
-                        <p>
-                         { `+${result.phone_code} ${result.iso2}`}
-                        </p>
+                        <p>{`+${result.phone_code} ${result.iso2}`}</p>
                       </div>
                     );
                   })}
               </div>
             </div>
-            {codeError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{codeError}</span>}
+            {codeError && (
+              <span
+                style={{ color: "red", fontWeight: "600", fontSize: "15px" }}
+              >
+                {codeError}
+              </span>
+            )}
           </div>
           <div className="mobile-number">
-          <input
-            type="number"
-            placeholder="Mobile number"
-            onChange={handleMobileChange}
-          />
-          {mobileError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{mobileError}</span>}
+            <input
+              type="number"
+              placeholder="Mobile number"
+              value={mobileNumber}
+              onChange={handleMobileChange}
+              onBlur={() =>
+                setMobileError(
+                  isFieldEmpty(mobileNumber, ["notEmpty"], "Mobile Number is required")
+                    .errorMessage
+                )
+              }
+            />
+            {mobileError && (
+              <span
+                style={{ color: "red", fontWeight: "600", fontSize: "15px" }}
+              >
+                {mobileError}
+              </span>
+            )}
           </div>
         </div>
         <div className="city-name">
@@ -220,9 +323,20 @@ const ReceiverForm = () => {
         <div className="state">
           <div className="state-result">
             <div className="state-search">
-              <input type="text" placeholder="State" onChange={handleChangeState} value={data}/>
-             
-              <SearchIcon className="search-icon"/>
+              <input
+                type="text"
+                placeholder="State"
+                onChange={handleChangeState}
+                value={data}
+                onBlur={() =>
+                  setStateError(
+                    isFieldEmpty(data, ["notEmpty"], "State is required")
+                      .errorMessage
+                  )
+                }
+              />
+
+              <SearchIcon className="search-icon" />
             </div>
             <div className="result">
               <div className="result2">
@@ -234,17 +348,18 @@ const ReceiverForm = () => {
                         className="result-list"
                         onClick={() => handleClickState(state)}
                       >
-                        <p>
-                          {state.name}
-                        </p>
+                        <p>{state.name}</p>
                       </div>
                     );
                   })}
               </div>
             </div>
           </div>
-          {stateError && <span style={{ color: 'red', fontWeight: "600", fontSize: "15px" }}>{stateError}</span>}
-
+          {stateError && (
+            <span style={{ color: "red", fontWeight: "600", fontSize: "15px" }}>
+              {stateError}
+            </span>
+          )}
         </div>
         <div className="button-receiver">
           <button type="submit">Add Receiver</button>

@@ -5,12 +5,13 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 // import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "./Details.css";
-import { makeStyles } from "@mui/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import FormDialog from "./DialogBox";
 import LocalAtmOutlinedIcon from "@mui/icons-material/LocalAtmOutlined";
 import { useNavigate } from 'react-router-dom'
 import { isFieldEmpty } from "../../utils/isFieldEmpty";
+import { updateMoneyData } from "../../utils/moneyDetailsSlice";
+import { useDispatch } from "react-redux";
 
 // const useStyles = makeStyles({
 //   icon: {
@@ -29,7 +30,6 @@ import { isFieldEmpty } from "../../utils/isFieldEmpty";
 // });
 
 const Details = () => {
-  // const classes = useStyles();
   const [promoCode, setPromoCode] = useState();
   const [senderError, setSenderError] = useState('')
   const [receiverError, setReceiverError] = useState('')
@@ -54,6 +54,7 @@ const Details = () => {
   const [receiverMoneyInput, setReceiverMoneyInput] = useState('');
 
  const navigate = useNavigate()
+ const dispatch = useDispatch();
 
   const fetchSenderCode = async (value) => {
     const filteredData = senderCountries.filter((country) => {
@@ -198,6 +199,15 @@ const Details = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const moneyData = {
+      senderCountry: selectedSenderCountry,
+      receiverCountry: selectedReceiverCountry,
+      senderCurrency: senderCurrency,
+      receiverCurrency: receiverCurrency,
+      senderMoneyInput: senderMoneyInput,
+      receiverMoneyInput: receiverMoneyInput,
+    }
+    dispatch(updateMoneyData(moneyData))
     // if(senderMoneyInput){
     //   setSenderError('')
     // }
